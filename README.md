@@ -23,3 +23,6 @@
     <requiredRuntime version="v4.0.20506" />
   </startup>
 ```
+
+2023 01 22 1145  
+*   commit - adding Executions columns through StatementDate  
