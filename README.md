@@ -11,6 +11,7 @@
     double is a problem - it's real in sqlite  
     using (System.Double) works in LinqPad  
     will see if it works in VS and then NT  
+    it worked  
 
 2023 01 22 0850  
 *   commit - Mixed mode assembly is built against version ‘v2.0.50727′ of the runtime  
@@ -26,3 +27,9 @@
 
 2023 01 22 1145  
 *   commit - adding Executions columns through StatementDate  
+
+2023 01 24 1042 1135  
+*   commit - finished adding properties to Executions class  
+    and now start fucking error:  
+    'The type or namespace name 'ExecutionsClass' could not be found (are you missing a using directive or an assembly reference?)'  
+
