@@ -35,5 +35,8 @@
 
 2023 01 25 1200  
 *   commit - error 'namespace name 'ExecutionsClass' could not be found ' is from not adding 
-    * file to project I think  
+    file to project I think  
+
+2023 01 25 1243  
+*   commit - retrieves data from .qslite db and creates list that will repalce instList(Ret)  
 

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ported_from_SqLiteExecutionsToListAndQueryResults
+namespace ListExecutionQueryClass
 {
-    internal class ListExecutionQueryClass
+    internal class ListExecutionQuery
     {
         public Int64 Id { get; set; }
         public string Symbol { get; set; }
@@ -19,7 +19,7 @@ namespace ported_from_SqLiteExecutionsToListAndQueryResults
         public Int64? Time { get; set; }
         public string HumanTime { get; set; }
 
-        public ListExecutionQueryClass() { }
+        public ListExecutionQuery() { }
 
     }
 }

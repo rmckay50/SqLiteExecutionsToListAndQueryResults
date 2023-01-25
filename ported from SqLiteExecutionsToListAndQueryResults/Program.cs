@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using ExecutionsClass;
 using Executions = ExecutionsClass.Executions;
+using Query = ListExecutionQueryClass.ListExecutionQuery;
+
 namespace SqLiteExecutionsToListAndQueryResults
 {
     internal class Program
@@ -14,6 +16,13 @@ namespace SqLiteExecutionsToListAndQueryResults
         static void Main(string[] args)
         {
             var path = @"Data Source = C:\data\NinjaTrader.sqlite";
+                List<Executions> listExecution = new List<Executions>();
+                List<Query> selectedList = new List<Query>();
+                List<Query> listFromQuery = new List<Query>();
+
+            var symbol = "NQ";
+            var instrument = 699839150758595;
+
 
             using (var db = new System.Data.SQLite.SQLiteConnection(path))
             {
@@ -32,7 +41,9 @@ namespace SqLiteExecutionsToListAndQueryResults
                 sqlite_cmd.CommandText = "SELECT * FROM Executions";
 
                 reader = sqlite_cmd.ExecuteReader();
-                List<Executions> listExecution = new List<Executions>();
+
+                //  used to hold data after read from db
+
                     while (reader.Read())
                     {
                         Executions exec = new Executions();
@@ -116,7 +127,67 @@ namespace SqLiteExecutionsToListAndQueryResults
                 {
                     Console.WriteLine("Error in opening db");
                 }
+                try
+                {
 
+                    // 	cycle through listExecution and retreive needed variables
+                    foreach (var execList in listExecution)
+                    {
+                        //	create ListExecutionQueryClass
+                        Query list = new Query();
+
+                        //	fill new list 
+                        list.Id = execList.Id;
+                        list.Symbol = symbol;
+                        list.Instrument = execList.Instrument;
+                        list.IsEntry = execList.IsEntry;
+                        list.IsExit = execList.IsExit;
+                        list.Position = execList.Position;
+                        list.Quantity = execList.Quantity;
+                        list.Price = execList.Price;
+                        list.Time = execList.Time;
+
+                        //	add to list
+                        selectedList.Add(list);
+
+                    }
+
+                    //selectedList.Dump("selectedList");
+
+                }
+
+                catch
+                {
+                    Console.WriteLine("error in foreach");
+                }
+                try
+                {
+                    //	use query to create list
+                    var query = (from l in selectedList
+                                 where (Int64)l.Instrument == (Int64)62124056207858786
+                                 select new Query()
+                                 {
+                                     Id = l.Id,
+                                     Symbol = symbol,
+                                     Instrument = l.Instrument,
+                                     IsEntry = l.IsEntry,
+                                     IsExit = l.IsExit,
+                                     Position = l.Position,
+                                     Quantity = l.Quantity,
+                                     Price = l.Price,
+                                     Time = l.Time,
+                                     HumanTime = TimeZoneInfo.ConvertTimeFromUtc(new DateTime((long)l.Time), TimeZoneInfo.Local).ToString("  HH:mm:ss MM/dd/yyyy  ")
+
+                                     //HumanTime = new DateTime((long)l.Time)
+                                 }).ToList();
+                    //query.Dump("query");
+                    listFromQuery = query.ToList();
+                }
+
+                catch
+                {
+                    Console.WriteLine("Query");
+                }
             }
         }
     }

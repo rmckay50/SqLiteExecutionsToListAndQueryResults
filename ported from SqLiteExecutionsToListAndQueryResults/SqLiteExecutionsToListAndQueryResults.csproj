@@ -78,7 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Executions.cs" />
-    <Compile Include="ListExecutionQueryClass.cs" />
+    <Compile Include="ListExecutionQuery.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
