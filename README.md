@@ -33,3 +33,7 @@
     and now start fucking error:  
     'The type or namespace name 'ExecutionsClass' could not be found (are you missing a using directive or an assembly reference?)'  
 
+2023 01 25 1200  
+*   commit - error 'namespace name 'ExecutionsClass' could not be found ' is from not adding 
+    * file to project I think  
+
