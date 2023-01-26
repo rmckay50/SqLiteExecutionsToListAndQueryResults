@@ -38,5 +38,11 @@
     file to project I think  
 
 2023 01 25 1243  
-*   commit - retrieves data from .qslite db and creates list that will repalce instList(Ret)  
+*   commit - retrieves data from .sqlite db and creates list that will repalce instList(Ret)  
+    sometimes the query list is 0   
 
+2023 01 25 1243  
+*   commit - sometimes the result is zero  
+    don't know why  
+    TODO  
+    get Ret class properties  

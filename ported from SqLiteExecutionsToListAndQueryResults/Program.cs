@@ -15,7 +15,8 @@ namespace SqLiteExecutionsToListAndQueryResults
     {
         static void Main(string[] args)
         {
-            var path = @"Data Source = C:\data\NinjaTrader.sqlite";
+            //var path = @"Data Source = C:\data\NinjaTrader.sqlite";
+            var path = @"Data Source = C:\Users\Owner\Documents\NinjaTrader 8\db\NinjaTrader.sqlite";
                 List<Executions> listExecution = new List<Executions>();
                 List<Query> selectedList = new List<Query>();
                 List<Query> listFromQuery = new List<Query>();
@@ -164,7 +165,7 @@ namespace SqLiteExecutionsToListAndQueryResults
                 {
                     //	use query to create list
                     var query = (from l in selectedList
-                                 where (Int64)l.Instrument == (Int64)62124056207858786
+                                 where (Int64)l.Instrument == (Int64)62124056207858786      //  62124056207858786
                                  select new Query()
                                  {
                                      Id = l.Id,
@@ -180,7 +181,7 @@ namespace SqLiteExecutionsToListAndQueryResults
 
                                      //HumanTime = new DateTime((long)l.Time)
                                  }).ToList();
-                    //query.Dump("query");
+                    query.ToList();
                     listFromQuery = query.ToList();
                 }
 
@@ -192,3 +193,5 @@ namespace SqLiteExecutionsToListAndQueryResults
         }
     }
 }
+//Id Account	BarIndex	Commission	Exchange	ExecutionId	Fee	Instrument	IsEntry	IsEntryStrategy	IsExit	IsExitStrategy	LotSize	MarketPosition	MaxPrice	MinPrice	Name	OrderId	Position	PositionStrategy	Price	Quantity	Rate	StatementDate	Time	ServerName
+//16633	2	-1	0	9	b6519f9200c84acb9d29002b46be94f7	0	62124056207858786	0	0	1	0	1	1	-1.79769313486232E+308	1.79769313486232E+308	Close	80929054cdad4a39a524760693980c2f	0	0	11873	1	1	638102016000000000	638102771851317160	ZBOOK
