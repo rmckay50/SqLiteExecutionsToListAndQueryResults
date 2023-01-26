@@ -50,3 +50,7 @@
 2023 01 25 1955  
 *   commit - where is Ret() filled in creating routines?  
     'Extension to Create List from NT Db for 2nd Version Fill fnList Prices (conflicted).linq'  
+
+2023 01 26 0425  
+*   commit - changed Ret.IsEntry and Ret.IsExit to bool? from long? in Extensions  
+    will be easier to understand instList list  

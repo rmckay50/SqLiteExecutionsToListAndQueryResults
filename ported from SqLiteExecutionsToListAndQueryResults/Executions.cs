@@ -26,10 +26,12 @@ namespace ExecutionsClass
         public Int64 Instrument { get; set; }
 
         public Int64? IsEntry { get; set; }
+        public bool? IsEntryB { get; set; }
 
         public Int64? IsEntryStrategy { get; set; }
 
         public Int64? IsExit { get; set; }
+        public Boolean? IsExitB { get; set; }
 
         public Int64? IsExitStrategy { get; set; }
 

@@ -18,9 +18,13 @@ namespace SqLiteExecutionsToListAndQueryResults
         {
             //var path = @"Data Source = C:\data\NinjaTrader.sqlite";
             var path = @"Data Source = C:\Users\Owner\Documents\NinjaTrader 8\db\NinjaTrader.sqlite";
-                List<Executions> listExecution = new List<Executions>();
-                List<Query> selectedList = new List<Query>();
-                List<Query> listFromQuery = new List<Query>();
+            //  list to hold valiables in Executions table from NinjaTrader.sqlite
+            List<Executions> listExecution = new List<Executions>();
+            //  list to hold Ret() format from listExecution
+            List<Ret> listExecutionRet = new List<Ret>();
+            List<Query> selectedList = new List<Query>();
+            List<Ret> instList = new List<Ret>();
+            List<Query> listFromQuery = new List<Query>();
 
             var symbol = "NQ";
             var instrument = 699839150758595;
@@ -129,6 +133,29 @@ namespace SqLiteExecutionsToListAndQueryResults
                 {
                     Console.WriteLine("Error in opening db");
                 }
+                //  change IsEntry and IsExit to bool?
+                foreach (var entry in listExecution)
+                {
+                    //  IsEntry to bool?
+                    if (entry.IsEntry == 0)
+                    {
+                        entry.IsEntryB = false;
+                    }
+                    else
+                    {
+                        entry.IsEntryB = true;
+                    }
+
+                    //  IsExit to bool?
+                    if (entry.IsExit == 0)
+                    {
+                        entry.IsExitB = false;
+                    }
+                    else
+                    {
+                        entry.IsExitB= true;
+                    }
+                }
                 try
                 {
 
@@ -171,23 +198,36 @@ namespace SqLiteExecutionsToListAndQueryResults
                     {
                         //	create ListExecutionQueryClass
                         Ret list = new Ret();
-
+                        { 
                         //	fill new list 
-                        list.InstId = execList.Id;
-                        list.Symbol = symbol;
-                        list.Instrument = execList.Instrument;
-                        list.IsEntry = execList.IsEntry;
-                        list.IsExit = execList.IsExit;
-                        list.Position = execList.Position;
-                        list.Quantity = execList.Quantity;
-                        list.Price = execList.Price;
-                        list.Time = execList.Time;
+                        list.InstId =        (long?)0;
+                        list.ExecId         = execList.Id;
+                        list.Name           = symbol;
+                        list.Position       = execList.Position;
+                        list.Quantity       = execList.Quantity;
+                        list.IsEntry        = execList.IsEntryB;
+                        list.IsExit         = execList.IsExitB;
+                        list.Price          = execList.Price;
+                        list.Time           = execList.Time;
+                        list.HumanTime      = TimeZoneInfo.ConvertTimeFromUtc(new DateTime((long)execList.Time), TimeZoneInfo.Local).ToString("  HH:mm:ss MM/dd/yyyy  ");
+                        list.Instrument     = execList.Instrument;
+                        list.P_L            = 0;
+                        list.Long_Short     = "";
 
                         //	add to list
-                        selectedList.Add(list);
-
+                        listExecutionRet.Add(list);
+                        }
                     }
+                    //  list from Executions table in Ret() format
+                    //  query this list with 'Instrument'
+                    listExecutionRet.ToList();
 
+                    // add Id to selectetRetList
+                    //foreach (Ret r in instList)
+                    //{
+                    //    r.InstId = instList;
+                    //    instList++;
+                    //}                                                                            .
                 }
 
                 catch
@@ -198,6 +238,7 @@ namespace SqLiteExecutionsToListAndQueryResults
                 try
                 {
                     //	use query to create list
+                    //  original attempt to create list with format near Ret format
                     var query = (from l in selectedList
                                  where (Int64)l.Instrument == (Int64)62124056207858786      //  62124056207858786
                                  select new Query()
@@ -211,7 +252,7 @@ namespace SqLiteExecutionsToListAndQueryResults
                                      Quantity = l.Quantity,
                                      Price = l.Price,
                                      Time = l.Time,
-                                     HumanTime = TimeZoneInfo.ConvertTimeFromUtc(new DateTime((long)l.Time), TimeZoneInfo.Local).ToString("  HH:mm:ss MM/dd/yyyy  ")
+                                     HumanTime = TimeZoneInfo.ConvertTimeFromUtc(new DateTime((long)l.Time), TimeZoneInfo.Local).ToString("  HH:mm:ss MM/dd/yyyy  "),
 
                                      //HumanTime = new DateTime((long)l.Time)
                                  }).ToList();
