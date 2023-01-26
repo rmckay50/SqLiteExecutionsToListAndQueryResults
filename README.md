@@ -58,3 +58,6 @@
 2023 01 26 1440  
 *   commit - queried list in Ret() format using 'instrument'  
     did not fill in expiry - it is located in 'Instruments'  
+
+2023 01 26 1500  
+*   commit - it works - creates the equivalent of instlist  

@@ -220,15 +220,8 @@ namespace SqLiteExecutionsToListAndQueryResults
                     }
                     //  list from Executions table in Ret() format
                     //  query this list with 'Instrument'
-                    listExecutionRet.ToList();
+                    //listExecutionRet.ToList();
 
-                    // add Id to selectetRetList
-                    var instId = 0;
-                    foreach (Ret r in listExecutionRet)
-                    {
-                        r.InstId = instId;
-                        instId++;
-                    }
                 }
                 catch
                 {
@@ -241,7 +234,7 @@ namespace SqLiteExecutionsToListAndQueryResults
                 /// </summary>
                 try
                 {
-                    var query = (from list in listExecutionRet
+                    instList = (from list in listExecutionRet
                                  where (Int64)list.Instrument == (Int64)62124056207858786      //  62124056207858786
                                  select new Ret()
                                  {
@@ -260,6 +253,16 @@ namespace SqLiteExecutionsToListAndQueryResults
                                      Long_Short = ""
 
                                  }).ToList();
+                    instList = instList.OrderByDescending(e => e.ExecId).ToList();
+
+                    // add Id to selectetRetList
+                    var instId = 0;
+                    foreach (Ret r in instList)
+                    {
+                        r.InstId = instId;
+                        instId++;
+                    }
+
 
                 }
                 catch
