@@ -54,3 +54,7 @@
 2023 01 26 0425  
 *   commit - changed Ret.IsEntry and Ret.IsExit to bool? from long? in Extensions  
     will be easier to understand instList list  
+
+2023 01 26 1440  
+*   commit - queried list in Ret() format using 'instrument'  
+    did not fill in expiry - it is located in 'Instruments'  

@@ -223,17 +223,50 @@ namespace SqLiteExecutionsToListAndQueryResults
                     listExecutionRet.ToList();
 
                     // add Id to selectetRetList
-                    //foreach (Ret r in instList)
-                    //{
-                    //    r.InstId = instList;
-                    //    instList++;
-                    //}                                                                            .
+                    var instId = 0;
+                    foreach (Ret r in listExecutionRet)
+                    {
+                        r.InstId = instId;
+                        instId++;
+                    }
                 }
-
                 catch
                 {
+                    Console.WriteLine("foreach (var execList in listExecution)");
+                }
+
+                ///<summary>
+                ///<param>query list from Executions in Ret() - listExecutionRets</param>
+                ///<param>did not fill in expiry - found in Instruments with instrument #</param>
+                /// </summary>
+                try
+                {
+                    var query = (from list in listExecutionRet
+                                 where (Int64)list.Instrument == (Int64)62124056207858786      //  62124056207858786
+                                 select new Ret()
+                                 {
+                                     InstId = (long?)0,
+                                     ExecId = list.ExecId,
+                                     Name = symbol,
+                                     Position = list.Position,
+                                     Quantity = list.Quantity,
+                                     IsEntry = list.IsEntry,
+                                     IsExit = list.IsExit,
+                                     Price = list.Price,
+                                     Time = list.Time,
+                                     HumanTime = list.HumanTime,
+                                     Instrument = list.Instrument,
+                                     P_L = 0,
+                                     Long_Short = ""
+
+                                 }).ToList();
 
                 }
+                catch
+                {
+                    Console.WriteLine("query list from Executions");
+                }
+
 
                 try
                 {
