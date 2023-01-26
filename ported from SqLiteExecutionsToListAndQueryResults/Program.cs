@@ -9,6 +9,7 @@ using ExecutionsClass;
 using Executions = ExecutionsClass.Executions;
 using Query = ListExecutionQueryClass.ListExecutionQuery;
 
+
 namespace SqLiteExecutionsToListAndQueryResults
 {
     internal class Program
@@ -161,6 +162,39 @@ namespace SqLiteExecutionsToListAndQueryResults
                 {
                     Console.WriteLine("error in foreach");
                 }
+                ///<summary>
+                ///<param>Select needed properties for Ret (instList return)</param>
+                /// </summary>
+                try
+                {
+                    foreach (var execList in listExecution)
+                    {
+                        //	create ListExecutionQueryClass
+                        Ret list = new Ret();
+
+                        //	fill new list 
+                        list.InstId = execList.Id;
+                        list.Symbol = symbol;
+                        list.Instrument = execList.Instrument;
+                        list.IsEntry = execList.IsEntry;
+                        list.IsExit = execList.IsExit;
+                        list.Position = execList.Position;
+                        list.Quantity = execList.Quantity;
+                        list.Price = execList.Price;
+                        list.Time = execList.Time;
+
+                        //	add to list
+                        selectedList.Add(list);
+
+                    }
+
+                }
+
+                catch
+                {
+
+                }
+
                 try
                 {
                     //	use query to create list

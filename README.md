@@ -46,3 +46,7 @@
     don't know why  
     TODO  
     get Ret class properties  
+
+2023 01 25 1955  
+*   commit - where is Ret() filled in creating routines?  
+    'Extension to Create List from NT Db for 2nd Version Fill fnList Prices (conflicted).linq'  
