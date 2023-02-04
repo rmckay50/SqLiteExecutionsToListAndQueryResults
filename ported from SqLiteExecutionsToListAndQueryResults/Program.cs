@@ -26,6 +26,16 @@ namespace SqLiteExecutionsToListAndQueryResults
             List<Ret> instList = new List<Ret>();
             List<Query> listFromQuery = new List<Query>();
 
+            //  Below is code from getInstList for filling in Expiry
+            //  Expiry is located in Instruments 
+            //  Can either load Instruments and do query or get info from chart 
+            //  Will try char and in interim just add string 'Dec 2022'
+            //  Format from .sdf instList was 'Dec 2022' 
+            //  Expiry = new DateTime((long)mInsIns.Expiry).ToString(" MMM yyyy"),
+            //  public string Expiry { get; set; }
+
+
+
             var symbol = "NQ";
             var instrument = 699839150758595;
 
@@ -156,8 +166,12 @@ namespace SqLiteExecutionsToListAndQueryResults
                         entry.IsExitB= true;
                     }
                 }
-                try
-                {
+
+            }
+                   #region Load 'Query' Commented out
+                    /*
+                    try
+                    {
 
                     // 	cycle through listExecution and retreive needed variables
                     foreach (var execList in listExecution)
@@ -183,126 +197,137 @@ namespace SqLiteExecutionsToListAndQueryResults
 
                     //selectedList.Dump("selectedList");
 
-                }
-
-                catch
-                {
-                    Console.WriteLine("error in foreach");
-                }
-                ///<summary>
-                ///<param>Select needed properties for Ret (instList return)</param>
-                /// </summary>
-                try
-                {
-                    foreach (var execList in listExecution)
-                    {
-                        //	create ListExecutionQueryClass
-                        Ret list = new Ret();
-                        { 
-                        //	fill new list 
-                        list.InstId =        (long?)0;
-                        list.ExecId         = execList.Id;
-                        list.Name           = symbol;
-                        list.Position       = execList.Position;
-                        list.Quantity       = execList.Quantity;
-                        list.IsEntry        = execList.IsEntryB;
-                        list.IsExit         = execList.IsExitB;
-                        list.Price          = execList.Price;
-                        list.Time           = execList.Time;
-                        list.HumanTime      = TimeZoneInfo.ConvertTimeFromUtc(new DateTime((long)execList.Time), TimeZoneInfo.Local).ToString("  HH:mm:ss MM/dd/yyyy  ");
-                        list.Instrument     = execList.Instrument;
-                        list.P_L            = 0;
-                        list.Long_Short     = "";
-
-                        //	add to list
-                        listExecutionRet.Add(list);
-                        }
                     }
-                    //  list from Executions table in Ret() format
-                    //  query this list with 'Instrument'
-                    //listExecutionRet.ToList();
 
-                }
-                catch
+                    catch
+                    {
+                    Console.WriteLine("error in foreach");
+                    }
+                    */
+                    #endregion Load 'Query' Commented out
+
+
+            ///<summary>
+            ///<param>Select needed properties for Ret (instList return)</param>
+            /// </summary>
+            try
+            {
+                foreach (var execList in listExecution)
                 {
-                    Console.WriteLine("foreach (var execList in listExecution)");
+                    //	create ListExecutionQueryClass
+                    Ret list = new Ret();
+                    { 
+                    //	fill new list 
+                    list.InstId =        (long?)0;
+                    list.ExecId         = execList.Id;
+                    list.Name           = symbol;
+                    list.Account        = execList.Account;
+                    list.Position       = execList.Position;
+                    list.Quantity       = execList.Quantity;
+                    list.IsEntry        = execList.IsEntryB;
+                    list.IsExit         = execList.IsExitB;
+                    list.Price          = execList.Price;
+                    list.Time           = execList.Time;
+                    list.HumanTime      = TimeZoneInfo.ConvertTimeFromUtc(new DateTime((long)execList.Time), TimeZoneInfo.Local).ToString("  HH:mm:ss MM/dd/yyyy  ");
+                    list.Instrument     = execList.Instrument;
+                    list.P_L            = 0;
+                    list.Long_Short     = "";
+
+                    //	add to list
+                    listExecutionRet.Add(list);
                 }
+            }
+            //  list from Executions table in Ret() format
+            //  query this list with 'Instrument'
+            //listExecutionRet.ToList();
+
+            }
+            catch
+            {
+            Console.WriteLine("foreach (var execList in listExecution)");
+            }
 
                 ///<summary>
                 ///<param>query list from Executions in Ret() - listExecutionRets</param>
                 ///<param>did not fill in expiry - found in Instruments with instrument #</param>
                 /// </summary>
-                try
-                {
-                    instList = (from list in listExecutionRet
-                                 where (Int64)list.Instrument == (Int64)62124056207858786      //  62124056207858786
-                                 select new Ret()
-                                 {
-                                     InstId = (long?)0,
-                                     ExecId = list.ExecId,
-                                     Name = symbol,
-                                     Position = list.Position,
-                                     Quantity = list.Quantity,
-                                     IsEntry = list.IsEntry,
-                                     IsExit = list.IsExit,
-                                     Price = list.Price,
-                                     Time = list.Time,
-                                     HumanTime = list.HumanTime,
-                                     Instrument = list.Instrument,
-                                     P_L = 0,
-                                     Long_Short = ""
+            try
+            {
+                instList = (from list in listExecutionRet
+                            //where (Int64)list.Instrument == (Int64)62124056207858786      //  62124056207858786
+                            select new Ret()
+                            {
+                                InstId         = (long?)0,
+                                ExecId         = list.ExecId,
+                                Account        = list.Account,
+                                Name           = symbol,
+                                Position       = list.Position,
+                                Quantity       = list.Quantity,
+                                IsEntry        = list.IsEntry,
+                                IsExit         = list.IsExit,
+                                Price          = list.Price,
+                                Time           = list.Time,
+                                HumanTime      = list.HumanTime,
+                                Instrument     = list.Instrument,
+                                Expiry         = "Dec 2022",
+                                P_L            = 0,
+                                Long_Short     = ""
 
-                                 }).ToList();
-                    instList = instList.OrderByDescending(e => e.ExecId).ToList();
+                            }).ToList();
+                instList = instList.OrderByDescending(e => e.ExecId).ToList();
 
-                    // add Id to selectetRetList
-                    var instId = 0;
-                    foreach (Ret r in instList)
-                    {
-                        r.InstId = instId;
-                        instId++;
-                    }
-
-
-                }
-                catch
-                {
-                    Console.WriteLine("query list from Executions");
-                }
+                // add Id to selectetRetList
+                var instId = 0;
+                foreach (Ret r in instList)
+            {
+                r.InstId = instId;
+                instId++;
+            }
 
 
-                try
-                {
-                    //	use query to create list
-                    //  original attempt to create list with format near Ret format
-                    var query = (from l in selectedList
-                                 where (Int64)l.Instrument == (Int64)62124056207858786      //  62124056207858786
-                                 select new Query()
-                                 {
-                                     Id = l.Id,
-                                     Symbol = symbol,
-                                     Instrument = l.Instrument,
-                                     IsEntry = l.IsEntry,
-                                     IsExit = l.IsExit,
-                                     Position = l.Position,
-                                     Quantity = l.Quantity,
-                                     Price = l.Price,
-                                     Time = l.Time,
-                                     HumanTime = TimeZoneInfo.ConvertTimeFromUtc(new DateTime((long)l.Time), TimeZoneInfo.Local).ToString("  HH:mm:ss MM/dd/yyyy  "),
-
-                                     //HumanTime = new DateTime((long)l.Time)
-                                 }).ToList();
-                    query.ToList();
-                    listFromQuery = query.ToList();
-                }
-
-                catch
-                {
-                    Console.WriteLine("Query");
-                }
+            }
+            catch
+            {
+                Console.WriteLine("query list from Executions");
             }
         }
     }
 }
+
+
 //Id Account	BarIndex	Commission	Exchange	ExecutionId	Fee	Instrument	IsEntry	IsEntryStrategy	IsExit	IsExitStrategy	LotSize	MarketPosition	MaxPrice	MinPrice	Name	OrderId	Position	PositionStrategy	Price	Quantity	Rate	StatementDate	Time	ServerName
 //16633	2	-1	0	9	b6519f9200c84acb9d29002b46be94f7	0	62124056207858786	0	0	1	0	1	1	-1.79769313486232E+308	1.79769313486232E+308	Close	80929054cdad4a39a524760693980c2f	0	0	11873	1	1	638102016000000000	638102771851317160	ZBOOK
+
+#region Check ability to create query - not needed
+/*
+try
+{
+    //	use query to create list
+    //  original attempt to create list with format near Ret format
+    var query = (from l in selectedList
+                    where (Int64)l.Instrument == (Int64)62124056207858786      //  62124056207858786
+                    select new Query()
+                    {
+                        Id         = l.Id,
+                        Symbol     = symbol,
+                        Instrument = l.Instrument,
+                        IsEntry    = l.IsEntry,
+                        IsExit     = l.IsExit,
+                        Position   = l.Position,
+                        Quantity   = l.Quantity,
+                        Price      = l.Price,
+                        Time       = l.Time,
+                        HumanTime  = TimeZoneInfo.ConvertTimeFromUtc(new DateTime((long)l.Time), TimeZoneInfo.Local).ToString("  HH:mm:ss MM/dd/yyyy  "),
+
+                        //HumanTime = new DateTime((long)l.Time)
+                    }).ToList();
+        query.ToList();
+        listFromQuery = query.ToList();
+}
+
+catch
+{
+    Console.WriteLine("Query");
+}
+*/
+#endregion Check ability to create query

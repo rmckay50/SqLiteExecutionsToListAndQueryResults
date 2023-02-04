@@ -15,6 +15,8 @@ namespace SqLiteExecutionsToListAndQueryResults
         public long? InstId { get; set; }         // Created when instList is made
 
         public long ExecId { get; set; }
+        public long Account { get; set; }
+
         public string Name { get; set; }
         public long? Position { get; set; }
         public long? Quantity { get; set; }
@@ -35,11 +37,12 @@ namespace SqLiteExecutionsToListAndQueryResults
 
         public Ret() { }
 
-        public Ret(long instId, int execId, string name, int? position, int? quantity, bool? isEntryL, bool? isExit, double? price, long? time, string humanTime, long instrument, string expiry, double? p_L, string long_Short)
+        public Ret(long instId, int execId, int account, string name, int? position, int? quantity, bool? isEntryL, bool? isExit, double? price, long? time, string humanTime, long instrument, string expiry, double? p_L, string long_Short)
         {
             InstId = instId;
             ExecId = execId;
             Name = name;
+            Account = account;
             Position = position;
             Quantity = quantity;
             IsEntry = isEntryL;

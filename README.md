@@ -3,7 +3,7 @@
 2023 01 22 0810  
 *	commit - ported from SqLiteExecutionsToListAndQueryResults 1.linq  
     opened C:\data\NinjaTrader.sqlite  
-    selected all from executins  
+    selected all from executions  
     used SQLiteDataReader to get data from executions  
     created 'List<Executions> listExecution' to store input  
     requires createing a new Executions object and adding to listExecution for each line SQLiteDataReader reads  
@@ -61,3 +61,11 @@
 
 2023 01 26 1500  
 *   commit - it works - creates the equivalent of instlist  
+    TODO
+    transfer to an indicator in NT  
+
+2023 01 30 0650  
+*   commit - 'SQLiteForNinjaTraderSQLiteDb.cs' in NinjaTrader.Custom is up to date on creating instList  
+    TODO  
+    locate section in 'CreateExtensionGetInsList.cs' where instList is created  
+    it's 'getInstList.cs'  it returns instList  
