@@ -69,3 +69,6 @@
     TODO  
     locate section in 'CreateExtensionGetInsList.cs' where instList is created  
     it's 'getInstList.cs'  it returns instList  
+
+2023 02 04 1605  
+*   commit - adding 'Create workingTrades'  
