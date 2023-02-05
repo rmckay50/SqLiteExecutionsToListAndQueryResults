@@ -9,6 +9,8 @@ using ExecutionsClass;
 using Executions = ExecutionsClass.Executions;
 using Query = ListExecutionQueryClass.ListExecutionQuery;
 using GetInstListSqLite;
+using Ret;
+
 
 
 
@@ -26,10 +28,6 @@ namespace SqLiteExecutionsToListAndQueryResults
         // Set to "12/12/2022" to get all of data
         public static string endDate = "02/28/2022";
         #endregion Set Parameters
-        /*
-
-*/
-
         static void Main(string[] args)
         {
             //var path = @"Data Source = C:\data\NinjaTrader.sqlite";
@@ -37,12 +35,16 @@ namespace SqLiteExecutionsToListAndQueryResults
             //  list to hold valiables in Executions table from NinjaTrader.sqlite
             List<Executions> listExecution = new List<Executions>();
             //  list to hold Ret() format from listExecution
-            List<Ret> listExecutionRet = new List<Ret>();
+            List<Ret.Ret> listExecutionRet = new List<Ret.Ret>();
             List<Query> selectedList = new List<Query>();
-            List<Ret> instList = new List<Ret>();
+            //List<Ret.Ret> instList = new List<Ret.Ret>();
+           //var instList = new List<Ret.Ret>();
+
             List<Query> listFromQuery = new List<Query>();
 
-            instList = GetInstListSqLite.Methods.getInstList(name, startDate, endDate, bPlayback);
+            //instList = (List<Ret.Ret>)Methods.getInstList(name, startDate, endDate, bPlayback);
+            var instList = Methods.getInstList(name, startDate, endDate, bPlayback);
+
 
             //  Below is code from getInstList for filling in Expiry
             //  Expiry is located in Instruments 
@@ -230,7 +232,7 @@ namespace SqLiteExecutionsToListAndQueryResults
                 foreach (var execList in listExecution)
                 {
                     //	create ListExecutionQueryClass
-                    Ret list = new Ret();
+                    Ret.Ret list = new Ret.Ret();
                     { 
                     //	fill new list 
                     list.InstId =        (long?)0;
@@ -268,9 +270,9 @@ namespace SqLiteExecutionsToListAndQueryResults
                 /// </summary>
             try
             {
-                instList = (from list in listExecutionRet
+                var instLi = (from list in listExecutionRet
                             //where (Int64)list.Instrument == (Int64)62124056207858786      //  62124056207858786
-                            select new Ret()
+                            select new Ret.Ret()
                             {
                                 InstId         = (long?)0,
                                 ExecId         = list.ExecId,
@@ -293,7 +295,7 @@ namespace SqLiteExecutionsToListAndQueryResults
 
                 // add Id to selectetRetList
                 var instId = 0;
-                foreach (Ret r in instList)
+                foreach (var r in instList)
             {
                 r.InstId = instId;
                 instId++;

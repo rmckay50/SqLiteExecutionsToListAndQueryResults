@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using ExecutionsClass;
 using Executions = ExecutionsClass.Executions;
-using Query = ListExecutionQueryClass.ListExecutionQuery;
-using SqLiteExecutionsToListAndQueryResults;
+using Ret;
+//using Query = ListExecutionQueryClass.ListExecutionQuery;
+//using SqLiteExecutionsToListAndQueryResults;
 
 
 
@@ -19,17 +20,19 @@ namespace GetInstListSqLite
     public static class Methods
     {
         //public static List<Ret> instList = new List<Ret>();
-        public static List<Ret> getInstList(string name,
+        public static List<Ret.Ret> getInstList(string name,
             string startDate, string endDate, bool bPlayback)
         {
             var path = @"Data Source = C:\Users\Owner\Documents\NinjaTrader 8\db\NinjaTrader.sqlite";
             //  list to hold valiables in Executions table from NinjaTrader.sqlite
             List<Executions> listExecution = new List<Executions>();
             //  list to hold Ret() format from listExecution
-            List<Ret> listExecutionRet = new List<Ret>();
-            List<Query> selectedList = new List<Query>();
-            List<Ret> instList = new List<Ret>();
-            List<Query> listFromQuery = new List<Query>();
+            List<Ret.Ret> listExecutionRet = new List<Ret.Ret>();
+            //List<Query> selectedList = new List<Query>();
+            //List<Ret.Ret> instList = new List<Ret.Ret>();
+           var instList = new List<Ret.Ret>();
+
+            //List<Query> listFromQuery = new List<Query>();
 
             //  Below is code from getInstList for filling in Expiry
             //  Expiry is located in Instruments 
@@ -146,7 +149,7 @@ namespace GetInstListSqLite
                 foreach (var execList in listExecution)
                 {
                     //	create ListExecutionQueryClass
-                    Ret list = new Ret();
+                    Ret.Ret list = new Ret.Ret();
                     {
                         //	fill new list 
                         list.InstId = (long?)0;
@@ -187,7 +190,7 @@ namespace GetInstListSqLite
                 instList = (from list in listExecutionRet
                                 //where (Int64)list.Instrument == (Int64)62124056207858786      //  62124056207858786
                             where list.Time > (sDateUtc.Ticks)
-                            select new Ret()
+                            select new Ret.Ret()
                             {
                                 InstId = (long?)0,
                                 ExecId = list.ExecId,
@@ -210,7 +213,7 @@ namespace GetInstListSqLite
 
                 // add Id to selectetRetList
                 var instId = 0;
-                foreach (Ret r in instList)
+                foreach (Ret.Ret r in instList)
                 {
                     r.InstId = instId;
                     instId++;
@@ -223,7 +226,7 @@ namespace GetInstListSqLite
                 Console.WriteLine("query list from Executions");
             }
 
-            return instList;
+            return (List<Ret.Ret>)instList.ToList();
 
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 //namespace NinjaTrader.Custom.AddOns
 //namespace SqLiteExecutionsToListAndQueryResults
-    namespace Ret
+namespace Ret
 
 {
     //  needed to change some times to work with .sqlite format
@@ -33,7 +33,7 @@ using System.Threading.Tasks;
         public string HumanTime { get; set; }
         public long Instrument { get; set; }
         //Expiry is located innInstruent list and will no be used
-       public string Expiry  { get; set; }
+        public string Expiry { get; set; }
         public double? P_L { get; set; }
         public string Long_Short { get; set; }
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 //namespace NinjaTrader.Custom.AddOns
-//namespace SqLiteExecutionsToListAndQueryResults
+//namespace GetInstListSqLite
     namespace Ret
 
 {

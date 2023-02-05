@@ -81,3 +81,9 @@
 
 2023 02 05 0215  
 *   commit - added new project 'getInstListSqLite' to hold getInstListSqLite.cs and create .dll  
+
+2023 02 05 0330  
+*   commit - GetInstListSqLite.cs changed to project and 'getInstListSqLite.dll' - namespace - GetInstListSqLite  
+    had problem with 'cannot convert List<Ret.Ret> to List<Ret.Ret>  
+    solved problem using var when creating 'instList'  
+    don't ask  
