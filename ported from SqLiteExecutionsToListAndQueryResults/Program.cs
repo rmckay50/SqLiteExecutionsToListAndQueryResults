@@ -8,12 +8,28 @@ using System.Data.SQLite;
 using ExecutionsClass;
 using Executions = ExecutionsClass.Executions;
 using Query = ListExecutionQueryClass.ListExecutionQuery;
+using GetInstListSqLite;
+
 
 
 namespace SqLiteExecutionsToListAndQueryResults
 {
     internal class Program
     {
+
+            #region Set Parameters
+        ////	Set to true for playback (account - 1)
+        //  These parameters are passed from calling progran
+        public static bool bPlayback = false;
+        public static string name = "nq";
+        public static string startDate = "  10:40:56 02/01/2023  ";
+        // Set to "12/12/2022" to get all of data
+        public static string endDate = "02/28/2022";
+        #endregion Set Parameters
+        /*
+
+*/
+
         static void Main(string[] args)
         {
             //var path = @"Data Source = C:\data\NinjaTrader.sqlite";
@@ -26,6 +42,8 @@ namespace SqLiteExecutionsToListAndQueryResults
             List<Ret> instList = new List<Ret>();
             List<Query> listFromQuery = new List<Query>();
 
+            instList = GetInstListSqLite.Methods.getInstList(name, startDate, endDate, bPlayback);
+
             //  Below is code from getInstList for filling in Expiry
             //  Expiry is located in Instruments 
             //  Can either load Instruments and do query or get info from chart 
@@ -34,11 +52,8 @@ namespace SqLiteExecutionsToListAndQueryResults
             //  Expiry = new DateTime((long)mInsIns.Expiry).ToString(" MMM yyyy"),
             //  public string Expiry { get; set; }
 
-
-
             var symbol = "NQ";
             var instrument = 699839150758595;
-
 
             using (var db = new System.Data.SQLite.SQLiteConnection(path))
             {

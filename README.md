@@ -75,3 +75,6 @@
 
 2023 02 04 1610  
 *   commit - create .dll to replace getInstList  
+
+2023 02 05 0210  
+*   commit - all coded from Program.cs (call NinjaTrader.sqlite, create, and return instList has been transferred to 'getInstList')  

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SqLiteExecutionsToListAndQueryResults
 { 
     //  needed to change some times to work with .sqlite format
-    internal class Ret
+    public class Ret
     {
         //  InstId is an Id for this class and is filled in later
         //public int InstId { get; set; }         // Created when instList is made
