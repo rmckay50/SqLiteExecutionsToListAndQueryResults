@@ -13,7 +13,7 @@ namespace Source
     {
         //public int PriorActiveEntryId { get; set; }														//	class source
         public int ActiveEntryId { get; set; }                                                          //	class source
-        public int? ActiveEntryRemaining { get; set; }                                                   //	class source
+        public long? ActiveEntryRemaining { get; set; }                                                   //	class source
         public double? ActiveEntryPrice { get; set; }                                                    //	class source
         public bool IsReversal { get; set; }                                                            //	class source
         public long PositionAfterReverse { get; set; }                                                   //	class source
@@ -23,8 +23,8 @@ namespace Source
         public int rowInTrades { get; set; }                                                            //	class source
         public int RowInTrades { get; set; }                                                            //	class source
         //public int RowInCsv { get; set; }                                                               //	class source
-        public int? ExitQty { get; set; }                                                                //	class source
-        public int? Remaining { get; set; }                                                              //	class source
+        public long? ExitQty { get; set; }                                                                //	class source
+        public long? Remaining { get; set; }                                                              //	class source
         public List<Trade.Trade> Trades { get; set; }                                                         //	class source
         public List<CSV.CSV> Csv { get; set; }                                                              //	class source
         public List<NTDrawLine.NTDrawLine> NTDrawLine { get; set; }
