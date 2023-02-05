@@ -97,3 +97,6 @@
     problem was index on source.Trades[xx] needs to be int not int?  
     I had failsafed some of the properties in int?/long  
     VS doesn't think through the problem and a cast won't work  
+
+2023 02 05 1605  
+*   commit -  build succeded but skeptical  

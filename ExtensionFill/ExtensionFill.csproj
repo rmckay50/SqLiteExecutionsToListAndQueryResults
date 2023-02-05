@@ -32,17 +32,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ExtensionGetActiveEntry">
-      <HintPath>..\CreateExtensionGetInstLIst\bin\Debug\ExtensionGetActiveEntry.dll</HintPath>
+      <HintPath>..\ExtensionGetActiveEntry\bin\Debug\ExtensionGetActiveEntry.dll</HintPath>
     </Reference>
     <Reference Include="ExtensionMatchAndAddToCsv">
-      <HintPath>..\CreateExtensionGetInstLIst\bin\Debug\ExtensionMatchAndAddToCsv.dll</HintPath>
+      <HintPath>..\ExtensionMatchAndAddToCsv\bin\Debug\ExtensionMatchAndAddToCsv.dll</HintPath>
     </Reference>
-    <Reference Include="ExtensionUpdateActiveEntry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CreateExtensionGetInstLIst\bin\Debug\ExtensionUpdateActiveEntry.dll</HintPath>
+    <Reference Include="ExtensionUpdateActiveEntry">
+      <HintPath>..\ExtensionUpdateActiveEntry\bin\Debug\ExtensionUpdateActiveEntry.dll</HintPath>
     </Reference>
     <Reference Include="Source">
-      <HintPath>..\CreateExtensionGetInstLIst\bin\Debug\Source.dll</HintPath>
+      <HintPath>..\Source\bin\Debug\Source.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,7 +52,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Trade">
-      <HintPath>..\CreateExtensionGetInstLIst\bin\Debug\Trade.dll</HintPath>
+      <HintPath>..\Trade\bin\Debug\Trade.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

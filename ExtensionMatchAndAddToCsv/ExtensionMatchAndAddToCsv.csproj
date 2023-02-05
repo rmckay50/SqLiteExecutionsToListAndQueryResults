@@ -34,6 +34,9 @@
     <Reference Include="CSV">
       <HintPath>..\CSV\bin\Debug\CSV.dll</HintPath>
     </Reference>
+    <Reference Include="ExtensionUpdateActiveEntry">
+      <HintPath>..\ExtensionUpdateActiveEntry\bin\Debug\ExtensionUpdateActiveEntry.dll</HintPath>
+    </Reference>
     <Reference Include="Source">
       <HintPath>..\Source\bin\Debug\Source.dll</HintPath>
     </Reference>

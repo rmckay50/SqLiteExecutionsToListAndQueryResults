@@ -12,8 +12,8 @@ namespace Source
     public class Source //: IEnumerable																	
     {
         //public int PriorActiveEntryId { get; set; }														//	class source
-        public long? ActiveEntryId { get; set; }                                                          //	class source
-        public long? ActiveEntryRemaining { get; set; }                                                   //	class source
+        public int ActiveEntryId { get; set; }                                                          //	class source
+        public int? ActiveEntryRemaining { get; set; }                                                   //	class source
         public double? ActiveEntryPrice { get; set; }                                                    //	class source
         public bool IsReversal { get; set; }                                                            //	class source
         public long PositionAfterReverse { get; set; }                                                   //	class source
@@ -21,10 +21,10 @@ namespace Source
         public long Position { get; set; }                                                               //	class source
         public double? StartingExitPrice { get; set; }                                                   //	class source
         public int rowInTrades { get; set; }                                                            //	class source
-        public long RowInTrades { get; set; }                                                            //	class source
+        public int RowInTrades { get; set; }                                                            //	class source
         //public int RowInCsv { get; set; }                                                               //	class source
-        public long? ExitQty { get; set; }                                                                //	class source
-        public long? Remaining { get; set; }                                                              //	class source
+        public int? ExitQty { get; set; }                                                                //	class source
+        public int? Remaining { get; set; }                                                              //	class source
         public List<Trade.Trade> Trades { get; set; }                                                         //	class source
         public List<CSV.CSV> Csv { get; set; }                                                              //	class source
         public List<NTDrawLine.NTDrawLine> NTDrawLine { get; set; }

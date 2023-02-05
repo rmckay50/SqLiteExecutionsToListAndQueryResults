@@ -13,7 +13,7 @@ namespace Trade
         public long ExecId { get; set; }                                                                     // 	class Trade
         public string Name { get; set; }
         public long? Position { get; set; }                                                                    // 	class Trade
-        public long? Qty { get; set; }                                                                    // 	class Trade
+        public int? Qty { get; set; }                                                                    // 	class Trade
         public bool? IsEntry { get; set; }                                                                 // 	class Trade
         public bool? IsExit { get; set; }                                                                  // 	class Trade
         public bool IsRev { get; set; }                                                                 // 	class Trade
@@ -37,7 +37,7 @@ namespace Trade
         // Without int execId (second cstr, code runs
         //public Ret(int instId, int execId, string name, int? position, int? quantity, bool? isEntry, bool? isExit, double? price, long? time,
         //	string humanTime, long instrument, string expiry, double? p_L, string long_Short)
-        public Trade(long execId, long? position, string name, long? qty, bool? isEntry, bool? isExit, double? price, long? time,
+        public Trade(long execId, long? position, string name, int? qty, bool? isEntry, bool? isExit, double? price, long? time,
             string humanTime, long instrument, string expiry, double? p_L, string long_Short)
         {
             //InstId = instId;
