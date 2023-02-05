@@ -19,7 +19,6 @@ namespace SqLiteExecutionsToListAndQueryResults
 {
     internal class Program
     {
-
             #region Set Parameters
         ////	Set to true for playback (account - 1)
         //  These parameters are passed from calling progran
@@ -31,284 +30,147 @@ namespace SqLiteExecutionsToListAndQueryResults
         #endregion Set Parameters
         static void Main(string[] args)
         {
+
             //var path = @"Data Source = C:\data\NinjaTrader.sqlite";
             var path = @"Data Source = C:\Users\Owner\Documents\NinjaTrader 8\db\NinjaTrader.sqlite";
+            List<CSV.CSV> CSv = new List<CSV.CSV>();
             //  list to hold valiables in Executions table from NinjaTrader.sqlite
             List<Executions> listExecution = new List<Executions>();
+            List<NTDrawLine.NTDrawLine> nTDrawline = new List<NTDrawLine.NTDrawLine>();
             //  list to hold Ret() format from listExecution
             List<Ret.Ret> listExecutionRet = new List<Ret.Ret>();
+            Source.Source source = new Source.Source();
             List<Query> selectedList = new List<Query>();
             List<Trade.Trade> workingTrades = new List<Trade.Trade>();
+            List<Trade.Trade> trades = new List<Trade.Trade>();
+
 
             List<Query> listFromQuery = new List<Query>();
 
             //instList = (List<Ret.Ret>)Methods.getInstList(name, startDate, endDate, bPlayback);
             var instList = Methods.getInstList(name, startDate, endDate, bPlayback);
 
-            #region Changed to getInstList.dll
-            /*
 
-            //  Below is code from getInstList for filling in Expiry
-            //  Expiry is located in Instruments 
-            //  Can either load Instruments and do query or get info from chart 
-            //  Will try char and in interim just add string 'Dec 2022'
-            //  Format from .sdf instList was 'Dec 2022' 
-            //  Expiry = new DateTime((long)mInsIns.Expiry).ToString(" MMM yyyy"),
-            //  public string Expiry { get; set; }
+            #region Create workingTrades
 
-            var symbol = "NQ";
-            var instrument = 699839150758595;
-
-            using (var db = new System.Data.SQLite.SQLiteConnection(path))
+            //  NT runs through this section more than once
+            //      Allow only one pass
+            if (trades.Count == 0)
             {
-                try
+                //	Create 'workingTrades' list																		//	Main
+                //	Slimmed down instList that is added to source list to make transfer to extension easier
+                // 	foreach through instList and add to trades list
+
+                foreach (var inst in instList)
                 {
-                    db.Open();
-                ///<summary>
-                ///<param> create reader, command </param>
-                ///<
-                /// </summary>
-                /// 
 
-                SQLiteDataReader reader;
-                SQLiteCommand sqlite_cmd;
-                sqlite_cmd = db.CreateCommand();
-                sqlite_cmd.CommandText = "SELECT * FROM Executions";
-
-                reader = sqlite_cmd.ExecuteReader();
-
-                //  used to hold data after read from db
-
-                    while (reader.Read())
-                    {
-                        Executions exec = new Executions();
-                        exec.Id                     = (long)reader[0];
-                        exec.Account                = (long)reader[1];
-                        exec.BarIndex               = (long)reader[2];
-                        exec.Commission             = (System.Double)reader[3];
-                        exec.Exchange               = (long)reader[4];
-                        exec.ExecutionId            = (string)reader[5];
-                        exec.Fee                    = (double)reader[6];
-                        exec.Instrument             = (long)reader[7];
-                        exec.IsEntry                = (long)reader[8];
-                        exec.IsEntryStrategy        = (long)reader[9];
-                        exec.IsExit                 = (long)reader[10];
-                        exec.IsExitStrategy         = (long)reader[11];
-                        exec.LotSize                = (long)reader[12];
-                        exec.MarketPosition         = (long)reader[13];
-                        exec.MaxPrice               = (System.Double)reader[14];
-                        exec.MinPrice               = (System.Double)reader[15];
-                        exec.Name                   = (string)reader[16];
-                        exec.OrderId                = (string)reader[17];
-                        exec.Position               = (long)reader[18];
-                        exec.PositionStrategy       = (long)reader[19];   
-                        exec.Price                  = (System.Double)reader[20];
-                        exec.Quantity               = (long)reader[21];
-                        exec.Rate                   = (double)reader[22];
-                        exec.StatementDate          = (long)reader[23];
-                        exec.Time                   = (long)reader[24];
-                        exec.ServerName             = (string)reader[25];
-
-                        //  add row to list
-                        listExecution.Add(exec);
-                        #region In work
-                        //var query = from e in listExecution
-                        //			where e.Id > 16621
-                        //			select e;
-                        //	query = query.ToList().Dump();
-                        /*
-                        try
-                        {
-                            db.Open();
-                        }
-                        catch (Exception)
-                        { }
-                        string filePath = @"C:\Error.txt";
-                        SQLiteDataReader reader;
-                        Console.WriteLine(string.Format("in catch"));
-                        SQLiteCommand sqlite_cmd;
-                        sqlite_cmd = db.CreateCommand();
-                        sqlite_cmd.CommandText = "SELECT Id, Account FROM Executions";
-                        reader = sqlite_cmd.ExecuteReader();
+                    trades.Add(new Trade.Trade(inst.ExecId, inst.Position, inst.Name, inst.Quantity, inst.IsEntry, inst.IsExit, inst.Price,
+                        inst.Time, inst.HumanTime, inst.Instrument, inst.Expiry, inst.P_L, inst.Long_Short));
 
 
-
-
-
-                        List<string> id = new List<string>();
-                        while (reader.Read())
-                        {
-                            string myreader = reader.GetInt64(0).ToString();
-                                reader.GetInt64(0).ToString();
-                            id.Add(myreader);
-                            Console.WriteLine(myreader);
-                        }
-                        //id = id.ToList().Dump();
-                var query = from ex in id 
-                select ex;
-                query = query.ToList().Take(10).Dump();
-            #endregion In work
-        }
-        //listExecution.Dump();
-
-
-
-        db.Close();
+                    //trades.Add(new Trade.Trade(inst.ExecId,);
 
 
                 }
-                catch (Exception)
+
+            }
+            //	Top row in Trades is last trade.  Position should be zero.  If not db error or trade was exited 
+            //		next day
+            //	Check that position is flat
+            //if (t.Id == 0 && t.IsExit == true)
+            if (trades[0].Position != 0)
+
+            {
+                Console.WriteLine(@"Postion on - not flat");                                                  //	Main
+                Console.WriteLine(string.Format("Trades count = {0}", trades.Count()));        //System.Environment.Exit(-1);                                                                //	Main																
+            }
+
+            //	Top row is now first trade in selected list - Position != 0
+            trades.Reverse();
+            workingTrades = trades.ToList();
+            trades.Clear();
+            #endregion Create workingTrades				
+
+
+
+            #region Code from 'Fill finList Prices Return List and Csv from Extension'							//	Main
+
+            #region Fill in Id																					//	Main
+            //	Add Id to workingTrades
+            int i = 0;                                                                                          //	Main
+
+            foreach (var t in workingTrades)                                                                        //	Main
+            {
+                t.Id = i;                                                                                       //	Main
+                i++;                                                                                            //	Main
+            }
+            #endregion Fill in Id																					//	Main
+
+            #region Create Lists
+            //  Lists added to source which is used in extensions
+            source.Trades = workingTrades;
+            //  Added to keep source.csv from accumulating
+            //source.Csv.Clear();
+            source.Csv = CSv;                                                                                   //	Main
+            source.NTDrawLine = nTDrawline;
+            #endregion Create Lists													
+
+            #region Initialize flags and variables in source
+            //	'rowInTrades' is increased on each pass of foreach(var t in workingTrades)
+            //	It is number of the row in trades that is either an Entry, Exit, or Reversal
+            source.rowInTrades = 0;
+            //	Commented out - not needed
+            //source.RowInCsv = 0;                                                                                //	Main
+
+            //	isReversal is flag for reversal
+            source.IsReversal = false;                                                                          //	Main
+            #endregion Initialize flags and variables in source
+
+            #region foreach() through source.Trades
+            foreach (var t in source.Trades)                                                                    //	Main
+            {
+                //Console.WriteLine("Line " + LN() + "  In Main()/ t.Id = " + t.Id);
+
+                //	Record size of first entry and Id
+                //	Need to keep record of how many entries are matched on split exits
+                //	Updated in UpdateActiveEntery()
+                if (t.Id == 0 && t.IsEntry == true)
                 {
-                    Console.WriteLine("Error in opening db");
+                    source.ActiveEntryId = t.Id;                                                                //	Main
+                    source.ActiveEntryRemaining = t.Qty;                                                        //	Main
+                    source.ActiveEntryPrice = t.Price;                                                          //	Main
                 }
-                //  change IsEntry and IsExit to bool?
-                foreach (var entry in listExecution)
+
+                //	Is trade a normal exit?
+                //	If previous trade was reversal the source.Trades.IsRev is == true
+                //if (t.Entry == false && t.Exit == true && source.Trades[source.rowInTrades - 1].IsRev == false) //	Main
+                if (t.IsEntry == false && t.IsExit == true) //	Main
+
                 {
-                    //  IsEntry to bool?
-                    if (entry.IsEntry == 0)
-                    {
-                        entry.IsEntryB = false;
-                    }
-                    else
-                    {
-                        entry.IsEntryB = true;
-                    }
-
-                    //  IsExit to bool?
-                    if (entry.IsExit == 0)
-                    {
-                        entry.IsExitB = false;
-                    }
-                    else
-                    {
-                        entry.IsExitB= true;
-                    }
+                    source.Fill();
                 }
 
-            }
-                   #region Load 'Query' Commented out
-                    /*
-                    try
-                    {
 
-                    // 	cycle through listExecution and retreive needed variables
-                    foreach (var execList in listExecution)
-                    {
-                        //	create ListExecutionQueryClass
-                        Query list = new Query();
-
-                        //	fill new list 
-                        list.Id = execList.Id;
-                        list.Symbol = symbol;
-                        list.Instrument = execList.Instrument;
-                        list.IsEntry = execList.IsEntry;
-                        list.IsExit = execList.IsExit;
-                        list.Position = execList.Position;
-                        list.Quantity = execList.Quantity;
-                        list.Price = execList.Price;
-                        list.Time = execList.Time;
-
-                        //	add to list
-                        selectedList.Add(list);
-
-                    }
-
-                    //selectedList.Dump("selectedList");
-
-                    }
-
-                    catch
-                    {
-                    Console.WriteLine("error in foreach");
-                    }
-                    #endregion Load 'Query' Commented out
-
-
-            ///<summary>
-            ///<param>Select needed properties for Ret (instList return)</param>
-            /// </summary>
-            try
-            {
-                foreach (var execList in listExecution)
+                //	Set reversal flags row numbers
+                if (t.IsEntry == true && t.IsExit == true)                                                          //	Main
                 {
-                    //	create ListExecutionQueryClass
-                    Ret.Ret list = new Ret.Ret();
-                    { 
-                    //	fill new list 
-                    list.InstId =        (long?)0;
-                    list.ExecId         = execList.Id;
-                    list.Name           = symbol;
-                    list.Account        = execList.Account;
-                    list.Position       = execList.Position;
-                    list.Quantity       = execList.Quantity;
-                    list.IsEntry        = execList.IsEntryB;
-                    list.IsExit         = execList.IsExitB;
-                    list.Price          = execList.Price;
-                    list.Time           = execList.Time;
-                    list.HumanTime      = TimeZoneInfo.ConvertTimeFromUtc(new DateTime((long)execList.Time), TimeZoneInfo.Local).ToString("  HH:mm:ss MM/dd/yyyy  ");
-                    list.Instrument     = execList.Instrument;
-                    list.P_L            = 0;
-                    list.Long_Short     = "";
-
-                    //	add to list
-                    listExecutionRet.Add(list);
+                    //	Set source.IsReversal = true - used to break out of Fill()
+                    source.IsReversal = true;                                                                   //	Main
+                    source.RowOfReverse = source.rowInTrades;                                                   //	Main
+                    source.RowInTrades = source.rowInTrades;                                                    //	Main
+                    source.rowInTrades = source.rowInTrades;                                                    //	Main
+                    source.Fill();                                                                              //	Main		
                 }
-            }
-            //  list from Executions table in Ret() format
-            //  query this list with 'Instrument'
-            //listExecutionRet.ToList();
 
-            }
-            catch
-            {
-            Console.WriteLine("foreach (var execList in listExecution)");
+                source.rowInTrades++;  // = rowInTrades;														//	Main
+                                       //	Increase source.rowInTrades it was cycled through in the Fill extension
+                source.RowInTrades++;                                                                           //	Main
             }
 
-                ///<summary>
-                ///<param>query list from Executions in Ret() - listExecutionRets</param>
-                ///<param>did not fill in expiry - found in Instruments with instrument #</param>
-                /// </summary>
-            try
-            {
-                var instLi = (from list in listExecutionRet
-                            //where (Int64)list.Instrument == (Int64)62124056207858786      //  62124056207858786
-                            select new Ret.Ret()
-                            {
-                                InstId         = (long?)0,
-                                ExecId         = list.ExecId,
-                                Account        = list.Account,
-                                Name           = symbol,
-                                Position       = list.Position,
-                                Quantity       = list.Quantity,
-                                IsEntry        = list.IsEntry,
-                                IsExit         = list.IsExit,
-                                Price          = list.Price,
-                                Time           = list.Time,
-                                HumanTime      = list.HumanTime,
-                                Instrument     = list.Instrument,
-                                Expiry         = "Dec 2022",
-                                P_L            = 0,
-                                Long_Short     = ""
+            #endregion foreach() through source.Trades
 
-                            }).ToList();
-                instList = instList.OrderByDescending(e => e.ExecId).ToList();
+            #endregion Code from 'Fill finList Prices Return List and Csv from Extension'										
 
-                // add Id to selectetRetList
-                var instId = 0;
-                foreach (var r in instList)
-            {
-                r.InstId = instId;
-                instId++;
-            }
-
-
-            }
-            catch
-            {
-                Console.WriteLine("query list from Executions");
-            }
-            */
-            #endregion Changed to getInstList.dll
 
         }
     }
@@ -317,6 +179,272 @@ namespace SqLiteExecutionsToListAndQueryResults
 
 //Id Account	BarIndex	Commission	Exchange	ExecutionId	Fee	Instrument	IsEntry	IsEntryStrategy	IsExit	IsExitStrategy	LotSize	MarketPosition	MaxPrice	MinPrice	Name	OrderId	Position	PositionStrategy	Price	Quantity	Rate	StatementDate	Time	ServerName
 //16633	2	-1	0	9	b6519f9200c84acb9d29002b46be94f7	0	62124056207858786	0	0	1	0	1	1	-1.79769313486232E+308	1.79769313486232E+308	Close	80929054cdad4a39a524760693980c2f	0	0	11873	1	1	638102016000000000	638102771851317160	ZBOOK
+
+#region Changed to getInstList.dll
+/*
+
+//  Below is code from getInstList for filling in Expiry
+//  Expiry is located in Instruments 
+//  Can either load Instruments and do query or get info from chart 
+//  Will try char and in interim just add string 'Dec 2022'
+//  Format from .sdf instList was 'Dec 2022' 
+//  Expiry = new DateTime((long)mInsIns.Expiry).ToString(" MMM yyyy"),
+//  public string Expiry { get; set; }
+
+var symbol = "NQ";
+var instrument = 699839150758595;
+
+using (var db = new System.Data.SQLite.SQLiteConnection(path))
+{
+    try
+    {
+        db.Open();
+    ///<summary>
+    ///<param> create reader, command </param>
+    ///<
+    /// </summary>
+    /// 
+
+    SQLiteDataReader reader;
+    SQLiteCommand sqlite_cmd;
+    sqlite_cmd = db.CreateCommand();
+    sqlite_cmd.CommandText = "SELECT * FROM Executions";
+
+    reader = sqlite_cmd.ExecuteReader();
+
+    //  used to hold data after read from db
+
+        while (reader.Read())
+        {
+            Executions exec = new Executions();
+            exec.Id                     = (long)reader[0];
+            exec.Account                = (long)reader[1];
+            exec.BarIndex               = (long)reader[2];
+            exec.Commission             = (System.Double)reader[3];
+            exec.Exchange               = (long)reader[4];
+            exec.ExecutionId            = (string)reader[5];
+            exec.Fee                    = (double)reader[6];
+            exec.Instrument             = (long)reader[7];
+            exec.IsEntry                = (long)reader[8];
+            exec.IsEntryStrategy        = (long)reader[9];
+            exec.IsExit                 = (long)reader[10];
+            exec.IsExitStrategy         = (long)reader[11];
+            exec.LotSize                = (long)reader[12];
+            exec.MarketPosition         = (long)reader[13];
+            exec.MaxPrice               = (System.Double)reader[14];
+            exec.MinPrice               = (System.Double)reader[15];
+            exec.Name                   = (string)reader[16];
+            exec.OrderId                = (string)reader[17];
+            exec.Position               = (long)reader[18];
+            exec.PositionStrategy       = (long)reader[19];   
+            exec.Price                  = (System.Double)reader[20];
+            exec.Quantity               = (long)reader[21];
+            exec.Rate                   = (double)reader[22];
+            exec.StatementDate          = (long)reader[23];
+            exec.Time                   = (long)reader[24];
+            exec.ServerName             = (string)reader[25];
+
+            //  add row to list
+            listExecution.Add(exec);
+            #region In work
+            //var query = from e in listExecution
+            //			where e.Id > 16621
+            //			select e;
+            //	query = query.ToList().Dump();
+            /*
+            try
+            {
+                db.Open();
+            }
+            catch (Exception)
+            { }
+            string filePath = @"C:\Error.txt";
+            SQLiteDataReader reader;
+            Console.WriteLine(string.Format("in catch"));
+            SQLiteCommand sqlite_cmd;
+            sqlite_cmd = db.CreateCommand();
+            sqlite_cmd.CommandText = "SELECT Id, Account FROM Executions";
+            reader = sqlite_cmd.ExecuteReader();
+
+
+
+
+
+            List<string> id = new List<string>();
+            while (reader.Read())
+            {
+                string myreader = reader.GetInt64(0).ToString();
+                    reader.GetInt64(0).ToString();
+                id.Add(myreader);
+                Console.WriteLine(myreader);
+            }
+            //id = id.ToList().Dump();
+    var query = from ex in id 
+    select ex;
+    query = query.ToList().Take(10).Dump();
+#endregion In work
+}
+//listExecution.Dump();
+
+
+
+db.Close();
+
+
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Error in opening db");
+    }
+    //  change IsEntry and IsExit to bool?
+    foreach (var entry in listExecution)
+    {
+        //  IsEntry to bool?
+        if (entry.IsEntry == 0)
+        {
+            entry.IsEntryB = false;
+        }
+        else
+        {
+            entry.IsEntryB = true;
+        }
+
+        //  IsExit to bool?
+        if (entry.IsExit == 0)
+        {
+            entry.IsExitB = false;
+        }
+        else
+        {
+            entry.IsExitB= true;
+        }
+    }
+
+}
+       #region Load 'Query' Commented out
+        /*
+        try
+        {
+
+        // 	cycle through listExecution and retreive needed variables
+        foreach (var execList in listExecution)
+        {
+            //	create ListExecutionQueryClass
+            Query list = new Query();
+
+            //	fill new list 
+            list.Id = execList.Id;
+            list.Symbol = symbol;
+            list.Instrument = execList.Instrument;
+            list.IsEntry = execList.IsEntry;
+            list.IsExit = execList.IsExit;
+            list.Position = execList.Position;
+            list.Quantity = execList.Quantity;
+            list.Price = execList.Price;
+            list.Time = execList.Time;
+
+            //	add to list
+            selectedList.Add(list);
+
+        }
+
+        //selectedList.Dump("selectedList");
+
+        }
+
+        catch
+        {
+        Console.WriteLine("error in foreach");
+        }
+        #endregion Load 'Query' Commented out
+
+
+///<summary>
+///<param>Select needed properties for Ret (instList return)</param>
+/// </summary>
+try
+{
+    foreach (var execList in listExecution)
+    {
+        //	create ListExecutionQueryClass
+        Ret.Ret list = new Ret.Ret();
+        { 
+        //	fill new list 
+        list.InstId =        (long?)0;
+        list.ExecId         = execList.Id;
+        list.Name           = symbol;
+        list.Account        = execList.Account;
+        list.Position       = execList.Position;
+        list.Quantity       = execList.Quantity;
+        list.IsEntry        = execList.IsEntryB;
+        list.IsExit         = execList.IsExitB;
+        list.Price          = execList.Price;
+        list.Time           = execList.Time;
+        list.HumanTime      = TimeZoneInfo.ConvertTimeFromUtc(new DateTime((long)execList.Time), TimeZoneInfo.Local).ToString("  HH:mm:ss MM/dd/yyyy  ");
+        list.Instrument     = execList.Instrument;
+        list.P_L            = 0;
+        list.Long_Short     = "";
+
+        //	add to list
+        listExecutionRet.Add(list);
+    }
+}
+//  list from Executions table in Ret() format
+//  query this list with 'Instrument'
+//listExecutionRet.ToList();
+
+}
+catch
+{
+Console.WriteLine("foreach (var execList in listExecution)");
+}
+
+    ///<summary>
+    ///<param>query list from Executions in Ret() - listExecutionRets</param>
+    ///<param>did not fill in expiry - found in Instruments with instrument #</param>
+    /// </summary>
+try
+{
+    var instLi = (from list in listExecutionRet
+                //where (Int64)list.Instrument == (Int64)62124056207858786      //  62124056207858786
+                select new Ret.Ret()
+                {
+                    InstId         = (long?)0,
+                    ExecId         = list.ExecId,
+                    Account        = list.Account,
+                    Name           = symbol,
+                    Position       = list.Position,
+                    Quantity       = list.Quantity,
+                    IsEntry        = list.IsEntry,
+                    IsExit         = list.IsExit,
+                    Price          = list.Price,
+                    Time           = list.Time,
+                    HumanTime      = list.HumanTime,
+                    Instrument     = list.Instrument,
+                    Expiry         = "Dec 2022",
+                    P_L            = 0,
+                    Long_Short     = ""
+
+                }).ToList();
+    instList = instList.OrderByDescending(e => e.ExecId).ToList();
+
+    // add Id to selectetRetList
+    var instId = 0;
+    foreach (var r in instList)
+{
+    r.InstId = instId;
+    instId++;
+}
+
+
+}
+catch
+{
+    Console.WriteLine("query list from Executions");
+}
+*/
+#endregion Changed to getInstList.dll
+
 
 #region Check ability to create query - not needed
 /*

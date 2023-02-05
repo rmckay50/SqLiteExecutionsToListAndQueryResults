@@ -39,7 +39,7 @@ namespace Ret
 
         public Ret() { }
 
-        public Ret(long instId, int execId, int account, string name, int? position, int? quantity, bool? isEntryL, bool? isExit, double? price, long? time, string humanTime, long instrument, string expiry, double? p_L, string long_Short)
+        public Ret(long instId, long execId, long account, string name, long? position, long? quantity, bool? isEntryL, bool? isExit, double? price, long? time, string humanTime, long instrument, string expiry, double? p_L, string long_Short)
         {
             InstId = instId;
             ExecId = execId;

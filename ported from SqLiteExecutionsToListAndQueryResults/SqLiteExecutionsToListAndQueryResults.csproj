@@ -51,6 +51,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CSV">
+      <HintPath>..\..\CreateExtensionGetInstLIst\CSV\bin\Debug\CSV.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -61,8 +64,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\getInstListSqLite\bin\Debug\getInstListSqLite.dll</HintPath>
     </Reference>
-    <Reference Include="Ret">
+    <Reference Include="NTDrawLine">
+      <HintPath>..\..\CreateExtensionGetInstLIst\NTDrawLine\bin\Debug\NTDrawLine.dll</HintPath>
+    </Reference>
+    <Reference Include="Ret, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Ret\bin\Debug\Ret.dll</HintPath>
+    </Reference>
+    <Reference Include="Source">
+      <HintPath>..\Source\bin\Debug\Source.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -84,8 +94,14 @@
     <Reference Include="System.Xml" />
     <Reference Include="Trade, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Trade.dll</HintPath>
+      <HintPath>..\Trade\bin\Debug\Trade.dll</HintPath>
     </Reference>
+    <!--
+    <Reference Include="Trade, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Trade\bin\Debug\Trade.dll</HintPath>
+    </Reference>
+	-->
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Executions.cs" />

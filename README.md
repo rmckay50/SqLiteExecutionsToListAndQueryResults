@@ -90,3 +90,10 @@
 
 2023 02 05 1310  
 *   commit - adding Creat workingTrades
+
+2023 02 05 1535  
+*   commit - cannot convert from int? to int solved  
+    in 'ExtensionGetActiveEntry' kept getting cannot comvert int? to int  
+    problem was index on source.Trades[xx] needs to be int not int?  
+    I had failsafed some of the properties in int?/long  
+    VS doesn't think through the problem and a cast won't work  
