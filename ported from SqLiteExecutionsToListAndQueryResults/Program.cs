@@ -10,6 +10,7 @@ using Executions = ExecutionsClass.Executions;
 using Query = ListExecutionQueryClass.ListExecutionQuery;
 using GetInstListSqLite;
 using Ret;
+using Trade;
 
 
 
@@ -37,14 +38,15 @@ namespace SqLiteExecutionsToListAndQueryResults
             //  list to hold Ret() format from listExecution
             List<Ret.Ret> listExecutionRet = new List<Ret.Ret>();
             List<Query> selectedList = new List<Query>();
-            //List<Ret.Ret> instList = new List<Ret.Ret>();
-           //var instList = new List<Ret.Ret>();
+            List<Trade.Trade> workingTrades = new List<Trade.Trade>();
 
             List<Query> listFromQuery = new List<Query>();
 
             //instList = (List<Ret.Ret>)Methods.getInstList(name, startDate, endDate, bPlayback);
             var instList = Methods.getInstList(name, startDate, endDate, bPlayback);
 
+            #region Changed to getInstList.dll
+            /*
 
             //  Below is code from getInstList for filling in Expiry
             //  Expiry is located in Instruments 
@@ -145,14 +147,13 @@ namespace SqLiteExecutionsToListAndQueryResults
                 var query = from ex in id 
                 select ex;
                 query = query.ToList().Take(10).Dump();
-                */
-                        #endregion In work
-                    }
-                    //listExecution.Dump();
+            #endregion In work
+        }
+        //listExecution.Dump();
 
 
 
-                    db.Close();
+        db.Close();
 
 
                 }
@@ -220,7 +221,6 @@ namespace SqLiteExecutionsToListAndQueryResults
                     {
                     Console.WriteLine("error in foreach");
                     }
-                    */
                     #endregion Load 'Query' Commented out
 
 
@@ -307,6 +307,9 @@ namespace SqLiteExecutionsToListAndQueryResults
             {
                 Console.WriteLine("query list from Executions");
             }
+            */
+            #endregion Changed to getInstList.dll
+
         }
     }
 }

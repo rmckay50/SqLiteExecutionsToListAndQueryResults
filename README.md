@@ -86,4 +86,7 @@
 *   commit - GetInstListSqLite.cs changed to project and 'getInstListSqLite.dll' - namespace - GetInstListSqLite  
     had problem with 'cannot convert List<Ret.Ret> to List<Ret.Ret>  
     solved problem using var when creating 'instList'  
-    don't ask  
+    reason is that the namespaces are different    
+
+2023 02 05 1310  
+*   commit - adding Creat workingTrades
