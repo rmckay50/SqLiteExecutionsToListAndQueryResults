@@ -60,6 +60,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ExtensionFill">
+      <HintPath>..\ExtensionFill\bin\Debug\ExtensionFill.dll</HintPath>
+    </Reference>
+    <Reference Include="ExtensionFillLongShortColumnInTradesList">
+      <HintPath>..\ExtensionFillLongShortColumnInTradesList\bin\Debug\ExtensionFillLongShortColumnInTradesList.dll</HintPath>
+    </Reference>
     <Reference Include="getInstListSqLite, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\getInstListSqLite\bin\Debug\getInstListSqLite.dll</HintPath>

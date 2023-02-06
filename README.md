@@ -103,3 +103,6 @@
 
 2023 02 05 1620  
 *   commit - compiling up to 'source.Fill();'  
+
+2023 02 05 1735  
+*   commit - added 'FillLongShortColumnInTradesList'  

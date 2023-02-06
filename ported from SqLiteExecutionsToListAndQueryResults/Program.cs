@@ -11,6 +11,11 @@ using Query = ListExecutionQueryClass.ListExecutionQuery;
 using GetInstListSqLite;
 using Ret;
 using Trade;
+//using ExtensionCreateNTDrawline;
+using ExtensionFill;
+using ExtensionFillLongShortColumnInTradesList;
+//using ExtensionFillProfitLossColumnInTradesList;
+//using getInstList;
 
 
 
@@ -170,6 +175,14 @@ namespace SqLiteExecutionsToListAndQueryResults
             #endregion foreach() through source.Trades
 
             #endregion Code from 'Fill finList Prices Return List and Csv from Extension'										
+
+
+            #region FillLongShortColumnInTradesList														//	Main
+            //	Call extenstion 'FillLongShortColumnInTradesList()' to fill in Long_Short column in workingTrades 
+            source.FillLongShortColumnInTradesList();
+
+            //souurce.FillLongShortColumnInTradesList();
+            #endregion FillLongShortColumnInTradesList
 
 
         }

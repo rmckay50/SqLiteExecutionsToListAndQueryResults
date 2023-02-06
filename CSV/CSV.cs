@@ -12,8 +12,8 @@ namespace CSV
         //public int EntryId { get; set; }
         public int EntryId { get; set; }                                                                //	class CSV
         public int FilledBy { get; set; }                                                               //	class CSV
-        public int? Qty { get; set; }                                                                    //	class CSV
-        public int? RemainingExits { get; set; }                                                         //	class CSV
+        public long? Qty { get; set; }                                                                    //	class CSV
+        public long? RemainingExits { get; set; }                                                         //	class CSV
         public long? StartTimeTicks { get; set; }
         public string StartTime { get; set; }
         public double? Entry { get; set; }                                                               //	class CSV
