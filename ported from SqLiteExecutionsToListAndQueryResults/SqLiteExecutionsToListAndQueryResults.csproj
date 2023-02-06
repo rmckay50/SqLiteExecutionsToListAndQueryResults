@@ -66,6 +66,9 @@
     <Reference Include="ExtensionFillLongShortColumnInTradesList">
       <HintPath>..\ExtensionFillLongShortColumnInTradesList\bin\Debug\ExtensionFillLongShortColumnInTradesList.dll</HintPath>
     </Reference>
+    <Reference Include="ExtensionFillProfitLossColumnInTradesList">
+      <HintPath>..\ExtensionFillProfitLossColumnInTradesList\bin\Debug\ExtensionFillProfitLossColumnInTradesList.dll</HintPath>
+    </Reference>
     <Reference Include="getInstListSqLite, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\getInstListSqLite\bin\Debug\getInstListSqLite.dll</HintPath>

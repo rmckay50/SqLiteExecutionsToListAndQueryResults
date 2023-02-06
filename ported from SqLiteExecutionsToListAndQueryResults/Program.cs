@@ -14,7 +14,7 @@ using Trade;
 //using ExtensionCreateNTDrawline;
 using ExtensionFill;
 using ExtensionFillLongShortColumnInTradesList;
-//using ExtensionFillProfitLossColumnInTradesList;
+using ExtensionFillProfitLossColumnInTradesList;
 //using getInstList;
 
 
@@ -183,6 +183,29 @@ namespace SqLiteExecutionsToListAndQueryResults
 
             //souurce.FillLongShortColumnInTradesList();
             #endregion FillLongShortColumnInTradesList
+
+
+            #region foreach through .csv and add StartTimeTicks StartTime ExitTimeTicks ExitTime Long_Short
+
+            foreach (var csv in source.Csv)
+            {
+                //	fill in blank spaces from workingTrades with time ans tickd//
+
+                csv.StartTimeTicks = workingTrades[csv.EntryId].Time;
+                csv.StartTime = workingTrades[csv.EntryId].HumanTime;
+                csv.EndTimeTicks = workingTrades[csv.FilledBy].Time;
+                csv.EndTime = workingTrades[csv.FilledBy].HumanTime;
+                csv.Long_Short = workingTrades[csv.EntryId].Long_Short;
+            }
+
+            #endregion foreach through .csv and add StarTimeTicks StartTime ExitTimeTicks ExitTime
+
+
+            #region Fill in P_L coulmn in source.csv
+            //	Call 'FillProfitLossColumnInTradesList' to fill in csv P_L column
+            source.FillProfitLossColumnInTradesList();
+            //source.
+            #endregion Fill in P_L coulmn in source.csv
 
 
         }

@@ -106,3 +106,6 @@
 
 2023 02 05 1735  
 *   commit - added 'FillLongShortColumnInTradesList'  
+
+2023 02 05 1750  
+*   commit - added 'FillProfitLossColumnInTradesList'
