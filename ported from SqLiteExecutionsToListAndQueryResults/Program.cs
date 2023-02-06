@@ -15,6 +15,11 @@ using Trade;
 using ExtensionFill;
 using ExtensionFillLongShortColumnInTradesList;
 using ExtensionFillProfitLossColumnInTradesList;
+using ExtensionCreateNTDrawline;
+using LINQtoCSV;
+using Parameters.Paramaters;
+
+
 //using getInstList;
 
 
@@ -48,9 +53,16 @@ namespace SqLiteExecutionsToListAndQueryResults
             List<Query> selectedList = new List<Query>();
             List<Trade.Trade> workingTrades = new List<Trade.Trade>();
             List<Trade.Trade> trades = new List<Trade.Trade>();
+            Input input = new Input()
+            {
+                BPlayback = false,
+                Name = "nq",
+                StartDate = "01/02/2022",
+                EndDate = "02/05/2023"
+            };
 
 
-            List<Query> listFromQuery = new List<Query>();
+            //List<Query> listFromQuery = new List<Query>();
 
             //instList = (List<Ret.Ret>)Methods.getInstList(name, startDate, endDate, bPlayback);
             var instList = Methods.getInstList(name, startDate, endDate, bPlayback);
@@ -191,11 +203,12 @@ namespace SqLiteExecutionsToListAndQueryResults
             {
                 //	fill in blank spaces from workingTrades with time ans tickd//
 
-                csv.StartTimeTicks = workingTrades[csv.EntryId].Time;
-                csv.StartTime = workingTrades[csv.EntryId].HumanTime;
-                csv.EndTimeTicks = workingTrades[csv.FilledBy].Time;
-                csv.EndTime = workingTrades[csv.FilledBy].HumanTime;
-                csv.Long_Short = workingTrades[csv.EntryId].Long_Short;
+                csv.Name                = workingTrades[csv.EntryId].Name;
+                csv.StartTimeTicks      = workingTrades[csv.EntryId].Time;
+                csv.StartTime           = workingTrades[csv.EntryId].HumanTime;
+                csv.EndTimeTicks        = workingTrades[csv.FilledBy].Time;
+                csv.EndTime             = workingTrades[csv.FilledBy].HumanTime;
+                csv.Long_Short          = workingTrades[csv.EntryId].Long_Short;
             }
 
             #endregion foreach through .csv and add StarTimeTicks StartTime ExitTimeTicks ExitTime
@@ -206,6 +219,32 @@ namespace SqLiteExecutionsToListAndQueryResults
             source.FillProfitLossColumnInTradesList();
             //source.
             #endregion Fill in P_L coulmn in source.csv
+
+
+            #region Create NTDrawLine list for use in saving to file and later in NT
+
+            source.NTDrawLine = source.CreateNTDrawline();
+
+            #endregion Create NTDrawLine list for use in saving to file and later in NT
+
+
+            #region Use LINQtoCSV on combined list to write
+            CsvFileDescription scvDescript = new CsvFileDescription();
+            CsvContext cc = new CsvContext();
+            cc.Write
+            (
+            source.NTDrawLine,
+            @"C:\data\csvNTDrawline.csv"
+            );
+
+            //  replace name (local declaration) to inpit.Name (calling program definition)
+            //  var fileName = name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
+            var fileName = input.Name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
+
+            var dir = "C:/data/";
+            cc.Write(source.NTDrawLine, dir + fileName);
+
+            #endregion
 
 
         }

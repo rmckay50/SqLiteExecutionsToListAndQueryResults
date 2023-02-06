@@ -51,14 +51,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CSV">
-      <HintPath>..\..\CreateExtensionGetInstLIst\CSV\bin\Debug\CSV.dll</HintPath>
+    <Reference Include="CSV, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CSV\bin\Debug\CSV.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExtensionCreateNTDrawline">
+      <HintPath>..\ExtensionCreateNTDrawline\bin\Debug\ExtensionCreateNTDrawline.dll</HintPath>
     </Reference>
     <Reference Include="ExtensionFill">
       <HintPath>..\ExtensionFill\bin\Debug\ExtensionFill.dll</HintPath>
@@ -73,8 +77,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\getInstListSqLite\bin\Debug\getInstListSqLite.dll</HintPath>
     </Reference>
-    <Reference Include="NTDrawLine">
-      <HintPath>..\..\CreateExtensionGetInstLIst\NTDrawLine\bin\Debug\NTDrawLine.dll</HintPath>
+    <Reference Include="LINQtoCSV, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\LINQtoCSV.dll</HintPath>
+    </Reference>
+    <Reference Include="NTDrawLine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\NTDrawLine\bin\Debug\NTDrawLine.dll</HintPath>
+    </Reference>
+    <Reference Include="Parameters">
+      <HintPath>..\Parameters\bin\Debug\Parameters.dll</HintPath>
     </Reference>
     <Reference Include="Ret, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -24,10 +24,12 @@ namespace ExtensionCreateNTDrawline
                 try
                 {
                     var t = DateTime.Parse(csv.StartTime).Ticks;
+
                     nTDrawLine.Add(
                         new NTDrawLine.NTDrawLine
                         (
                             0,
+                            csv.Name,
                             csv.Long_Short,
                             (long)csv.StartTimeTicks,
                             DateTime.Parse(csv.StartTime).ToString("HH:mm:ss  MM/dd/yyy"),

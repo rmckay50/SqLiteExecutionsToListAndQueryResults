@@ -109,3 +109,6 @@
 
 2023 02 05 1750  
 *   commit - added 'FillProfitLossColumnInTradesList'
+
+2023 02 06 0205  
+*   commit - added name to source.NTDrawLine to make it easier to determine .csv file contents  
