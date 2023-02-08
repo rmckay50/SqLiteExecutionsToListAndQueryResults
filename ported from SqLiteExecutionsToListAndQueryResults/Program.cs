@@ -27,7 +27,7 @@ using Parameters.Paramaters;
 
 namespace SqLiteExecutionsToListAndQueryResults
 {
-    internal class Program
+    public class Program
     {
             #region Set Parameters
         ////	Set to true for playback (account - 1)
@@ -38,11 +38,25 @@ namespace SqLiteExecutionsToListAndQueryResults
         // Set to "12/12/2022" to get all of data
         public static string endDate = "02/28/2022";
         #endregion Set Parameters
-        static void Main(string[] args)
+
+        /// <summary>
+        /// <switch between static void Main(string[] args) & public static void main(Paramaters.Input input)
+        ///     to use for .exe or .dll
+        ///     Parameters.Input input is filled in in callin program 
+        /// <param name="input"></param>
+        /// </summary>
+        /// 
+        //static void Main(string[] args)
+        //  can use 'Input' becaue using statement is 'using Parameters.Paramaters;'
+        public static void main(Input input)
+
         {
 
             //var path = @"Data Source = C:\data\NinjaTrader.sqlite";
-            var path = @"Data Source = C:\Users\Owner\Documents\NinjaTrader 8\db\NinjaTrader.sqlite";
+            //var path = @"Data Source = C:\Users\Owner\Documents\NinjaTrader 8\db\NinjaTrader.sqlite";
+            //var path = @"Data Source = \\RYZEN-2\NinjaTrader 8\db\NinjaTrader.sqlite";
+            var path = input.Path;
+
             List<CSV.CSV> CSv = new List<CSV.CSV>();
             //  list to hold valiables in Executions table from NinjaTrader.sqlite
             List<Executions> listExecution = new List<Executions>();
@@ -53,19 +67,48 @@ namespace SqLiteExecutionsToListAndQueryResults
             List<Query> selectedList = new List<Query>();
             List<Trade.Trade> workingTrades = new List<Trade.Trade>();
             List<Trade.Trade> trades = new List<Trade.Trade>();
-            Input input = new Input()
+
+            ///
+            ///<summary>
+            /// <as.exe> use the line 'Input input = new Input()'</as.exe>
+            /// <as.dll> use the section  ''</as.dll>
+            /// 
+            /// </summary>
+            /// 
+            #region Uncomment for use as .exe
+            Input exeInput = new Input()
             {
                 BPlayback = false,
                 Name = "nq",
                 StartDate = "01/02/2022",
                 EndDate = "02/05/2023"
             };
+            #endregion Uncomment for use as .exe
 
 
             //List<Query> listFromQuery = new List<Query>();
 
             //instList = (List<Ret.Ret>)Methods.getInstList(name, startDate, endDate, bPlayback);
-            var instList = Methods.getInstList(name, startDate, endDate, bPlayback);
+            var instList = Methods.getInstList
+                (
+            #region Uncomment for use as .exe
+                    //name,
+                    //startDate,
+                    //endDate,
+                    //bPlayback,
+                    //@"
+            #endregion Uncomment for use as .exe
+
+            #region Uncomment for use as .dll
+                input.Name,
+                input.StartDate,
+                input.EndDate,
+                input.BPlayback,
+                input.Path
+            #endregion Uncomment for use as .dll
+
+
+                );
 
 
             #region Create workingTrades
@@ -237,9 +280,9 @@ namespace SqLiteExecutionsToListAndQueryResults
             @"C:\data\csvNTDrawline.csv"
             );
 
-            //  replace name (local declaration) to inpit.Name (calling program definition)
+            //  replace name (local declaration) to input.Name (calling program definition)
             //  var fileName = name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
-            var fileName = input.Name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
+            var fileName = exeInput.Name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
 
             var dir = "C:/data/";
             cc.Write(source.NTDrawLine, dir + fileName);

@@ -17,7 +17,7 @@ namespace ExtensionUpdateActiveEntry
         //	All exits will be matched
         public static Source.Source UpdateActiveEntry(this Source.Source source, [CallerMemberName] string memberName = "", [CallerLineNumber] int LineNumber = 0)                                            //	UpdateAtiveEntry
         {
-            Console.WriteLine("\nUpdateActiveEntry() Called by " + memberName + " () at line " + LineNumber + " / " + LN());
+            //Console.WriteLine("\nUpdateActiveEntry() Called by " + memberName + " () at line " + LineNumber + " / " + LN());
             //Console.WriteLine($"\nsource.Remaining = {source.Remaining}" + " at line " + LN());                                //	UpdateAtiveEntry
             //Console.WriteLine($"\nsource.ExitQty = {source.ExitQty}" + " at line " + LN());                                	//	UpdateAtiveEntry
 
@@ -95,8 +95,8 @@ namespace ExtensionUpdateActiveEntry
             //Console.WriteLine($"\nsource.ExitQty = {source.ExitQty}" + " at line " + LN());                                        //	UpdateAtiveEntry
 
             //source.Csv.Dump("Csv");
-            Console.WriteLine("Csv");
-            Console.WriteLine("\nUpdateAtiveEntry() Returned to " + memberName + " () at line " + LineNumber + " / " + LN());
+            //Console.WriteLine("Csv");
+            //Console.WriteLine("\nUpdateAtiveEntry() Returned to " + memberName + " () at line " + LineNumber + " / " + LN());
 
             return source;                                                                                  //	UpdateAtiveEntry
 

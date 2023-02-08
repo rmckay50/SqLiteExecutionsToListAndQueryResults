@@ -112,3 +112,6 @@
 
 2023 02 06 0205  
 *   commit - added name to source.NTDrawLine to make it easier to determine .csv file contents  
+
+2023 02 07 2145  
+*   commit - changed Parameters to add path because of difference with Ryzen-2  

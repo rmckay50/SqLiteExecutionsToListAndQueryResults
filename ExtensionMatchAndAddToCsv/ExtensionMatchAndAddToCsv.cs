@@ -17,7 +17,7 @@ namespace ExtensionMatchAndAddToCsv
 	//	csv will not be in correct order to sort before exit
 	public static Source.Source MatchAndAddToCsv(this Source.Source source, [CallerMemberName] string memberName = "", [CallerLineNumber] int LineNumber = 0)                                           //	MatchndAddToCsv
 	{
-		Console.WriteLine("\nMatchAndAddToCsv() Called by " + memberName + " () at line " + LineNumber + " / " + LN());
+		//Console.WriteLine("\nMatchAndAddToCsv() Called by " + memberName + " () at line " + LineNumber + " / " + LN());
 
 
 		//	Do not set Matched on exit row until remaining == 0
@@ -94,7 +94,7 @@ namespace ExtensionMatchAndAddToCsv
             ///	Try commenting this out
             //source.ExitQty = source.ExitQty - source.Remaining;
 
-            Console.WriteLine("\nMatchndAddToCsv() Returned to " + memberName + "() at line " + LineNumber + " / " + LN());
+            //Console.WriteLine("\nMatchndAddToCsv() Returned to " + memberName + "() at line " + LineNumber + " / " + LN());
 
 		return source;                                                                                  //	MatchndAddToCsv
 	}

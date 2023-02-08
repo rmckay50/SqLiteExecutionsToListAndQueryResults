@@ -17,7 +17,7 @@ namespace ExtensionGetActiveEntry
         //	Record starting Id
         public static Source.Source GetActiveEntry(this Source.Source source, [CallerMemberName] string memberName = "", [CallerLineNumber] int LineNumber = 0)                                           //	GetActiveEntry
         {
-            Console.WriteLine("\nGetActiveEntry() Called by " + memberName + " () at line " + LineNumber + " / " + LN());
+            //Console.WriteLine("\nGetActiveEntry() Called by " + memberName + " () at line " + LineNumber + " / " + LN());
             //if (source.ActiveEntryRemaining == 0)
             //{
             var s = source.Trades[0].Id;
@@ -45,7 +45,7 @@ namespace ExtensionGetActiveEntry
                 //}
             }
 
-            Console.WriteLine("\nGetActiveEntry() Returned to " + memberName + "() at line " + LineNumber + " / " + LN());
+            //Console.WriteLine("\nGetActiveEntry() Returned to " + memberName + "() at line " + LineNumber + " / " + LN());
 
             return source;
         }

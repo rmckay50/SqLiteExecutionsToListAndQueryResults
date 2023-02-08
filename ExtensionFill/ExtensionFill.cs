@@ -22,7 +22,7 @@ namespace ExtensionFill
         public static Source.Source Fill(this Source.Source source, [CallerMemberName] string memberName = "", [CallerLineNumber] int LineNumber = 0)
         {
             //	Fill() Called by Main () at line 449 / 522
-            Console.WriteLine("\nFill() Called by " + memberName + " () at line " + LineNumber + " / " + LN());
+            //Console.WriteLine("\nFill() Called by " + memberName + " () at line " + LineNumber + " / " + LN());
 
             //	Get Qty of Exit 
             //	Set source.ExitQty and source.Remaining to quantity in Exit row
@@ -73,7 +73,7 @@ namespace ExtensionFill
                 //	while source.RowInTrades is used to back up through Trades list to find matched entries
                 source.RowInTrades--;                                                                       //	Fill
             }
-            Console.WriteLine("\nFill() Returned to " + memberName + "() at line " + LineNumber + " / " + LN());
+            //Console.WriteLine("\nFill() Returned to " + memberName + "() at line " + LineNumber + " / " + LN());
 
             return source;                                                                                  //	Fill
         }

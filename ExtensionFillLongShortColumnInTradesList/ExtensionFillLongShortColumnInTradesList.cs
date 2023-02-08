@@ -22,7 +22,7 @@ namespace ExtensionFillLongShortColumnInTradesList
         public static Source.Source FillLongShortColumnInTradesList(this Source.Source source, [CallerMemberName] string memberName = "", [CallerLineNumber] int LineNumber = 0)
         {
             //	Fill() Called by Main () at line 449 / 522
-            Console.WriteLine("\nFillLongShortColumnInTradesList() Called by " + memberName + " () at line " + LineNumber + " / " + LN());
+            //Console.WriteLine("\nFillLongShortColumnInTradesList() Called by " + memberName + " () at line " + LineNumber + " / " + LN());
             //	Order is set to top entry being the last trade
             //	Position value will be zero
             //	foreach through list and compare previous position to current position
@@ -116,7 +116,7 @@ namespace ExtensionFillLongShortColumnInTradesList
 
 
 
-            Console.WriteLine("\nFill() Returned to " + memberName + "() at line " + LineNumber + " / " + LN());
+            //Console.WriteLine("\nFill() Returned to " + memberName + "() at line " + LineNumber + " / " + LN());
 
             return source;                                                                                  //	Fill
         }

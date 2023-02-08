@@ -21,9 +21,10 @@ namespace GetInstListSqLite
     {
         //public static List<Ret> instList = new List<Ret>();
         public static List<Ret.Ret> getInstList(string name,
-            string startDate, string endDate, bool bPlayback)
+            string startDate, string endDate, bool bPlayback, string pathFromCall)
         {
-            var path = @"Data Source = C:\Users\Owner\Documents\NinjaTrader 8\db\NinjaTrader.sqlite";
+            //var path = @"Data Source = C:\Users\Owner\Documents\NinjaTrader 8\db\NinjaTrader.sqlite";
+            var path = pathFromCall;
             //  list to hold valiables in Executions table from NinjaTrader.sqlite
             List<Executions> listExecution = new List<Executions>();
             //  list to hold Ret() format from listExecution
@@ -109,9 +110,9 @@ namespace GetInstListSqLite
                     }
                     db.Close();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Error in opening db");
+                    Console.WriteLine(ex);
                 }
 
                 //  change IsEntry and IsExit to bool?
