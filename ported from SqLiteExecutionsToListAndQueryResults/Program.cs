@@ -138,13 +138,18 @@ namespace SqLiteExecutionsToListAndQueryResults
             //		next day
             //	Check that position is flat
             //if (t.Id == 0 && t.IsExit == true)
-            if (trades[0].Position != 0)
-
+            try
             {
-                Console.WriteLine(@"Postion on - not flat");                                                  //	Main
-                Console.WriteLine(string.Format("Trades count = {0}", trades.Count()));        //System.Environment.Exit(-1);                                                                //	Main																
-            }
+                if (trades[0].Position != 0)
 
+                {                
+                    Console.WriteLine(@"Postion on - not flat");                                                  //	Main
+                    Console.WriteLine(string.Format("Trades position = {0}", (trades[0].Position)));        //System.Environment.Exit(-1);                                                                //	Main																
+                }
+            }
+            catch
+            {
+            }
             //	Top row is now first trade in selected list - Position != 0
             trades.Reverse();
             workingTrades = trades.ToList();

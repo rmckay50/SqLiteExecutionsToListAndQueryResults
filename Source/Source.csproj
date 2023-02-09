@@ -34,9 +34,6 @@
     <Reference Include="CSV">
       <HintPath>..\CSV\bin\Debug\CSV.dll</HintPath>
     </Reference>
-    <Reference Include="ExtensionCreateNTDrawline">
-      <HintPath>..\ExtensionCreateNTDrawline\bin\Debug\ExtensionCreateNTDrawline.dll</HintPath>
-    </Reference>
     <Reference Include="NTDrawLine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\NTDrawLine\bin\Debug\NTDrawLine.dll</HintPath>

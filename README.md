@@ -115,3 +115,9 @@
 
 2023 02 07 2145  
 *   commit - changed Parameters to add path because of difference with Ryzen-2  
+
+2023 02 08 1900  
+*   commit - this works - creates 'csvNTDrawline.csv' and 'NQ 2023 02 08   04 29 30.csv'  
+    TODO   
+    change project name from 'ported from SqLiteExecutionsToListAndQueryResults.dll' to  
+        'SqLiteExecutionsToListAndQueryResults' for readability  
