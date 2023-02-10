@@ -129,3 +129,8 @@
     had problems with not finding getInstList in 'getInstListSqLite'  
     had change Data Source to \NinjaTrader\db\NinjaTrader.sqlite which had open position  
     deleted last trade and .sln works  
+
+2023 02 09 1925  
+*   commit - this is working again but change was made to 'Parameters.cs'  
+    for some reason there were 2 namespaces  
+    may have been attempt to work with NT indicator  
