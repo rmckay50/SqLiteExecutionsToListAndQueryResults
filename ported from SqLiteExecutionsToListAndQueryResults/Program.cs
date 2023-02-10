@@ -17,7 +17,7 @@ using ExtensionFillLongShortColumnInTradesList;
 using ExtensionFillProfitLossColumnInTradesList;
 using ExtensionCreateNTDrawline;
 using LINQtoCSV;
-using Parameters.Paramaters;
+using Parameters;
 
 
 //using getInstList;

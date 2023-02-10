@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace Parameters
 {
-    namespace Paramaters
-    {
         public class Input
         {
             public bool BPlayback { get; set; }
@@ -33,4 +31,4 @@ namespace Parameters
             }
         }
     }
-}
+

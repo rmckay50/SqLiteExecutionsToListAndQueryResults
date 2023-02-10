@@ -121,3 +121,11 @@
     TODO   
     change project name from 'ported from SqLiteExecutionsToListAndQueryResults.dll' to  
         'SqLiteExecutionsToListAndQueryResults' for readability  
+
+2023 02 09 1920  
+*   commit - changing project name caused problems  
+    cloned project and all projects need to be rebuilt  
+    this is back where I started  
+    had problems with not finding getInstList in 'getInstListSqLite'  
+    had change Data Source to \NinjaTrader\db\NinjaTrader.sqlite which had open position  
+    deleted last trade and .sln works  

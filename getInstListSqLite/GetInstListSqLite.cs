@@ -190,7 +190,7 @@ namespace GetInstListSqLite
             {
                 instList = (from list in listExecutionRet
                                 //where (Int64)list.Instrument == (Int64)62124056207858786      //  62124056207858786
-                            //where list.Time > (sDateUtc.Ticks)
+                            where list.Time > (sDateUtc.Ticks)
                             select new Ret.Ret()
                             {
                                 InstId = (long?)0,
