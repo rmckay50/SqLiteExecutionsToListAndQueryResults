@@ -48,7 +48,7 @@ namespace SqLiteExecutionsToListAndQueryResults
         /// 
         //static void Main(string[] args)
         //  can use 'Input' becaue using statement is 'using Parameters.Paramaters;'
-        public static void main(Input input)
+        public static void main(Parameters.Input input)
 
         {
 

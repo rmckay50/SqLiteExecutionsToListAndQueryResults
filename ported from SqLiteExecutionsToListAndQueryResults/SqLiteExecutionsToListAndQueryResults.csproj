@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{373C676B-3016-4B5C-A7E0-0AAC2AE58A9B}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>ported_from_SqLiteExecutionsToListAndQueryResults</RootNamespace>
-    <AssemblyName>ported from SqLiteExecutionsToListAndQueryResults</AssemblyName>
+    <RootNamespace>SqLiteExecutionsToListAndQueryResults</RootNamespace>
+    <AssemblyName>SqLiteExecutionsToListAndQueryResults</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

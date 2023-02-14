@@ -134,3 +134,6 @@
 *   commit - this is working again but change was made to 'Parameters.cs'  
     for some reason there were 2 namespaces  
     may have been attempt to work with NT indicator  
+
+2023 02 13 1725  
+*   commit - NinjaTrader needs Executions - adding Executions project  
