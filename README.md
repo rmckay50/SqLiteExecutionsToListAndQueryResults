@@ -141,3 +141,6 @@
 2023 02 13 1730  
 *   commit -  added Executions project and used Executions.dll in getInstListSqLite  
     works when called from 'CallSqLiteExecutionsToListAndQueryResults'  
+
+2023 02 13 2140  
+*   commit - changing 'CallSqLiteExecutionsToListAndQueryResults' to use Executions.dll  
