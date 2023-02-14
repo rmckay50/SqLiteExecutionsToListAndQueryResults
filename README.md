@@ -137,3 +137,7 @@
 
 2023 02 13 1725  
 *   commit - NinjaTrader needs Executions - adding Executions project  
+
+2023 02 13 1730  
+*   commit -  added Executions project and used Executions.dll in getInstListSqLite  
+    works when called from 'CallSqLiteExecutionsToListAndQueryResults'  
