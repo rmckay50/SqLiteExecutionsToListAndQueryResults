@@ -13,28 +13,34 @@ using System.Threading.Tasks;
     public class Ret
     {
         //  InstId is an Id for this class and is filled in later
-        //public int InstId { get; set; }         // Created when instList is made
         public long? InstId { get; set; }         // Created when instList is made
 
         public long ExecId { get; set; }
+
         public long Account { get; set; }
 
         public string Name { get; set; }
+
         public long? Position { get; set; }
+
         public long? Quantity { get; set; }
-        //public long? IsEntryL { get; set; }
+
         public bool? IsEntry { get; set; }
 
         public bool? IsExit { get; set; }
-        //public bool? IsExitB { get; set; }
 
         public double? Price { get; set; }
+
         public long? Time { get; set; }
+
         public string HumanTime { get; set; }
+
         public long Instrument { get; set; }
         //Expiry is located innInstruent list and will no be used
        public string Expiry  { get; set; }
+
         public double? P_L { get; set; }
+
         public string Long_Short { get; set; }
 
         public Ret() { }
@@ -57,9 +63,5 @@ using System.Threading.Tasks;
             P_L = p_L;
             Long_Short = long_Short;
         }
-
-
-
-
     }
 }

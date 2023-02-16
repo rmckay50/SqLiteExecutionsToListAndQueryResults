@@ -11,6 +11,7 @@ namespace Source
 {
     public class Source //: IEnumerable																	
     {
+        
         //public int PriorActiveEntryId { get; set; }														//	class source
         public int ActiveEntryId { get; set; }                                                          //	class source
         public long? ActiveEntryRemaining { get; set; }                                                   //	class source

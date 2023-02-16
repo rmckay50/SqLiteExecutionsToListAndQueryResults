@@ -144,3 +144,7 @@
 
 2023 02 13 2140  
 *   commit - changing 'CallSqLiteExecutionsToListAndQueryResults' to use Executions.dll  
+    NT sees 2 Executions definitions - 'CallSqLiteExecutionsToListAndQueryResults' and 'Executions'  
+
+2023 02 16 1620  
+*   commit - need to include output file name from NinjaTrader  
