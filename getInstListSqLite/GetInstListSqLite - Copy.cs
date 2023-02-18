@@ -31,7 +31,7 @@ namespace GetInstListSqLite
             List<Ret.Ret> listExecutionRet = new List<Ret.Ret>();
             //List<Query> selectedList = new List<Query>();
             //List<Ret.Ret> instList = new List<Ret.Ret>();
-            var instList = new List<Ret.Ret>();
+           var instList = new List<Ret.Ret>();
 
             //List<Query> listFromQuery = new List<Query>();
 
@@ -54,7 +54,7 @@ namespace GetInstListSqLite
             var startTicks = sDateUtc.Ticks;
             DateTime eDate = DateTime.Parse(endDate);                           //.Dump("eDate")
             DateTime eDateUtc = TimeZoneInfo.ConvertTimeToUtc(eDate);           //.Dump("eDateUtc")
-
+             
 
             using (var db = new System.Data.SQLite.SQLiteConnection(path))
             {
@@ -189,17 +189,9 @@ namespace GetInstListSqLite
             /// </summary>
             try
             {
-                //  If bPlayback == true set account == 1
-                //  default is account == 2
-                var account = 2;
-                if( bPlayback == true)
-                {
-                    account = 1;
-                }
                 instList = (from list in listExecutionRet
                                 //where (Int64)list.Instrument == (Int64)62124056207858786      //  62124056207858786
-                            where list.Time > (sDateUtc.Ticks) 
-                            where list.Account == account
+                            where list.Time > (sDateUtc.Ticks)
                             select new Ret.Ret()
                             {
                                 InstId = (long?)0,

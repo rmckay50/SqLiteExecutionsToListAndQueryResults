@@ -148,3 +148,6 @@
 
 2023 02 16 1620  
 *   commit - need to include output file name from NinjaTrader  
+
+2023 02 18 1620  
+*   commit - save before copying all files to 'SqLiteExecutionsToListAndQueryResults' in Ryzen-2  

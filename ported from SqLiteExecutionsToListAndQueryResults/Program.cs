@@ -18,6 +18,7 @@ using ExtensionFillProfitLossColumnInTradesList;
 using ExtensionCreateNTDrawline;
 using LINQtoCSV;
 using Parameters;
+using System.IO;
 
 
 //using getInstList;
@@ -48,7 +49,7 @@ namespace SqLiteExecutionsToListAndQueryResults
         /// 
         //static void Main(string[] args)
         //  can use 'Input' becaue using statement is 'using Parameters.Paramaters;'
-        public static void main(Parameters.Input input)
+        public static void main(Parameters.Input input, string output)
 
         {
 
@@ -282,15 +283,30 @@ namespace SqLiteExecutionsToListAndQueryResults
             cc.Write
             (
             source.NTDrawLine,
-            @"C:\data\csvNTDrawline.csv"
+            //@"C:\data\csvNTDrawline.csv"
+            output
             );
 
             //  replace name (local declaration) to input.Name (calling program definition)
             //  var fileName = name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
-            var fileName = exeInput.Name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
+            //var fileName = exeInput.Name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
+            var fileName = input.Name.ToUpper() + "                " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
+            var dir = Path.GetDirectoryName(output); ;
 
-            var dir = "C:/data/";
-            cc.Write(source.NTDrawLine, dir + fileName);
+            if ( input.BPlayback != true )
+            {
+                cc.Write(source.NTDrawLine, dir + @"\" + fileName);
+            }
+            else
+            {
+                fileName = input.Name.ToUpper() + " Playback " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
+                cc.Write(source.NTDrawLine, dir + @"\" + fileName);
+            }
+
+
+
+
+            //cc.Write(source.NTDrawLine, output);
 
             #endregion
 
