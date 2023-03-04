@@ -121,3 +121,8 @@
     works with tsla:  
         InputPath       = @"Data Source = c:\Users\Rod\Documents\NinjaTrader 8\db\NinjaTrader.sqlite",  
         OutputPath      = @"C:\data\OutPutStr.csv"  
+
+2023 03 04 0845  
+*   commit - changing nTDrawLine - Name => Symbol   
+    starting with 'NTDrawLine.cs'  
+    then build  
