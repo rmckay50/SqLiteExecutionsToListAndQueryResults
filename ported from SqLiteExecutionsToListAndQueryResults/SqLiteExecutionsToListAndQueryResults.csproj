@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{373C676B-3016-4B5C-A7E0-0AAC2AE58A9B}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>ported_from_SqLiteExecutionsToListAndQueryResults</RootNamespace>
-    <AssemblyName>ported from SqLiteExecutionsToListAndQueryResults</AssemblyName>
+    <RootNamespace>SqLiteExecutionsToListAndQueryResults</RootNamespace>
+    <AssemblyName>SqLiteExecutionsToListAndQueryResults</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -63,6 +63,9 @@
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Executions">
+      <HintPath>..\Executions\bin\Debug\Executions.dll</HintPath>
     </Reference>
     <Reference Include="ExtensionCreateNTDrawline">
       <HintPath>..\ExtensionCreateNTDrawline\bin\Debug\ExtensionCreateNTDrawline.dll</HintPath>
@@ -128,11 +131,9 @@
 	-->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Executions.cs" />
     <Compile Include="ListExecutionQuery.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ret.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

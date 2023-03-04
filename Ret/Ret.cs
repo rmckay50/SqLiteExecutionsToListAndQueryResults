@@ -4,30 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//namespace NinjaTrader.Custom.AddOns
-//namespace SqLiteExecutionsToListAndQueryResults
 namespace Ret
-
 {
     //  needed to change some times to work with .sqlite format
     public class Ret
     {
         //  InstId is an Id for this class and is filled in later
-        //public int InstId { get; set; }         // Created when instList is made
         public long? InstId { get; set; }         // Created when instList is made
-
         public long ExecId { get; set; }
         public long Account { get; set; }
-
         public string Name { get; set; }
         public long? Position { get; set; }
         public long? Quantity { get; set; }
-        //public long? IsEntryL { get; set; }
         public bool? IsEntry { get; set; }
-
         public bool? IsExit { get; set; }
-        //public bool? IsExitB { get; set; }
-
         public double? Price { get; set; }
         public long? Time { get; set; }
         public string HumanTime { get; set; }
@@ -57,9 +47,5 @@ namespace Ret
             P_L = p_L;
             Long_Short = long_Short;
         }
-
-
-
-
     }
 }

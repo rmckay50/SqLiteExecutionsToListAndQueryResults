@@ -31,7 +31,7 @@ namespace GetInstListSqLite
             List<Ret.Ret> listExecutionRet = new List<Ret.Ret>();
             //List<Query> selectedList = new List<Query>();
             //List<Ret.Ret> instList = new List<Ret.Ret>();
-           var instList = new List<Ret.Ret>();
+            var instList = new List<Ret.Ret>();
 
             //List<Query> listFromQuery = new List<Query>();
 
@@ -51,6 +51,7 @@ namespace GetInstListSqLite
             // Used for start and stop times
             DateTime sDate = DateTime.Parse(startDate);                         //.Dump("sDate")
             DateTime sDateUtc = TimeZoneInfo.ConvertTimeToUtc(sDate);           //.Dump("sDateUtc")
+            var startTicks = sDateUtc.Ticks;
             DateTime eDate = DateTime.Parse(endDate);                           //.Dump("eDate")
             DateTime eDateUtc = TimeZoneInfo.ConvertTimeToUtc(eDate);           //.Dump("eDateUtc")
 
@@ -155,7 +156,8 @@ namespace GetInstListSqLite
                         //	fill new list 
                         list.InstId = (long?)0;
                         list.ExecId = execList.Id;
-                        list.Name = symbol;
+                        //list.Name = symbol                        
+                        list.Name = name;
                         list.Account = execList.Account;
                         list.Position = execList.Position;
                         list.Quantity = execList.Quantity;
@@ -188,15 +190,24 @@ namespace GetInstListSqLite
             /// </summary>
             try
             {
+                //  If bPlayback == true set account == 1
+                //  default is account == 2
+                var account = 2;
+                if (bPlayback == true)
+                {
+                    account = 1;
+                }
                 instList = (from list in listExecutionRet
                                 //where (Int64)list.Instrument == (Int64)62124056207858786      //  62124056207858786
                             where list.Time > (sDateUtc.Ticks)
+                            where list.Account == account
                             select new Ret.Ret()
                             {
                                 InstId = (long?)0,
                                 ExecId = list.ExecId,
                                 Account = list.Account,
-                                Name = symbol,
+                                //Name = symbol,
+                                Name = list.Name,
                                 Position = list.Position,
                                 Quantity = list.Quantity,
                                 IsEntry = list.IsEntry,

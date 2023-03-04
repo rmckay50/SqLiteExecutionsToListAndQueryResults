@@ -115,3 +115,9 @@
 
 2023 02 07 2145  
 *   commit - changed Parameters to add path because of difference with Ryzen-2  
+
+2023 03 03 2055  
+*   commit - completed change in prameters - added input and output paths
+    works with tsla:  
+        InputPath       = @"Data Source = c:\Users\Rod\Documents\NinjaTrader 8\db\NinjaTrader.sqlite",  
+        OutputPath      = @"C:\data\OutPutStr.csv"  

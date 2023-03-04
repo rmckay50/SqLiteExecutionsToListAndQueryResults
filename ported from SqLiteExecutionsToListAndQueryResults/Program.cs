@@ -17,7 +17,8 @@ using ExtensionFillLongShortColumnInTradesList;
 using ExtensionFillProfitLossColumnInTradesList;
 using ExtensionCreateNTDrawline;
 using LINQtoCSV;
-using Parameters.Paramaters;
+using Parameters;
+using System.IO;
 
 
 //using getInstList;
@@ -29,7 +30,7 @@ namespace SqLiteExecutionsToListAndQueryResults
 {
     public class Program
     {
-            #region Set Parameters
+        #region Set Parameters
         ////	Set to true for playback (account - 1)
         //  These parameters are passed from calling progran
         public static bool bPlayback = false;
@@ -48,14 +49,16 @@ namespace SqLiteExecutionsToListAndQueryResults
         /// 
         //static void Main(string[] args)
         //  can use 'Input' becaue using statement is 'using Parameters.Paramaters;'
-        public static void main(Input input)
+        //public static void main(Parameters.Input input, string output)
+        public static void main(Parameters.Input input)
+
 
         {
 
             //var path = @"Data Source = C:\data\NinjaTrader.sqlite";
             //var path = @"Data Source = C:\Users\Owner\Documents\NinjaTrader 8\db\NinjaTrader.sqlite";
             //var path = @"Data Source = \\RYZEN-2\NinjaTrader 8\db\NinjaTrader.sqlite";
-            var path = input.Path;
+            var path = input.InputPath;
 
             List<CSV.CSV> CSv = new List<CSV.CSV>();
             //  list to hold valiables in Executions table from NinjaTrader.sqlite
@@ -92,11 +95,11 @@ namespace SqLiteExecutionsToListAndQueryResults
             var instList = Methods.getInstList
                 (
             #region Uncomment for use as .exe
-                    //name,
-                    //startDate,
-                    //endDate,
-                    //bPlayback,
-                    //@"
+                //name,
+                //startDate,
+                //endDate,
+                //bPlayback,
+                //@"
             #endregion Uncomment for use as .exe
 
             #region Uncomment for use as .dll
@@ -104,7 +107,7 @@ namespace SqLiteExecutionsToListAndQueryResults
                 input.StartDate,
                 input.EndDate,
                 input.BPlayback,
-                input.Path
+                input.InputPath
             #endregion Uncomment for use as .dll
 
 
@@ -138,13 +141,18 @@ namespace SqLiteExecutionsToListAndQueryResults
             //		next day
             //	Check that position is flat
             //if (t.Id == 0 && t.IsExit == true)
-            if (trades[0].Position != 0)
-
+            try
             {
-                Console.WriteLine(@"Postion on - not flat");                                                  //	Main
-                Console.WriteLine(string.Format("Trades count = {0}", trades.Count()));        //System.Environment.Exit(-1);                                                                //	Main																
-            }
+                if (trades[0].Position != 0)
 
+                {
+                    Console.WriteLine(@"Postion on - not flat");                                                  //	Main
+                    Console.WriteLine(string.Format("Trades position = {0}", (trades[0].Position)));        //System.Environment.Exit(-1);                                                                //	Main																
+                }
+            }
+            catch
+            {
+            }
             //	Top row is now first trade in selected list - Position != 0
             trades.Reverse();
             workingTrades = trades.ToList();
@@ -246,12 +254,12 @@ namespace SqLiteExecutionsToListAndQueryResults
             {
                 //	fill in blank spaces from workingTrades with time ans tickd//
 
-                csv.Name                = workingTrades[csv.EntryId].Name;
-                csv.StartTimeTicks      = workingTrades[csv.EntryId].Time;
-                csv.StartTime           = workingTrades[csv.EntryId].HumanTime;
-                csv.EndTimeTicks        = workingTrades[csv.FilledBy].Time;
-                csv.EndTime             = workingTrades[csv.FilledBy].HumanTime;
-                csv.Long_Short          = workingTrades[csv.EntryId].Long_Short;
+                csv.Name = workingTrades[csv.EntryId].Name;
+                csv.StartTimeTicks = workingTrades[csv.EntryId].Time;
+                csv.StartTime = workingTrades[csv.EntryId].HumanTime;
+                csv.EndTimeTicks = workingTrades[csv.FilledBy].Time;
+                csv.EndTime = workingTrades[csv.FilledBy].HumanTime;
+                csv.Long_Short = workingTrades[csv.EntryId].Long_Short;
             }
 
             #endregion foreach through .csv and add StarTimeTicks StartTime ExitTimeTicks ExitTime
@@ -277,15 +285,30 @@ namespace SqLiteExecutionsToListAndQueryResults
             cc.Write
             (
             source.NTDrawLine,
-            @"C:\data\csvNTDrawline.csv"
+            //@"C:\data\csvNTDrawline.csv"
+            input.OutputPath
             );
 
             //  replace name (local declaration) to input.Name (calling program definition)
             //  var fileName = name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
-            var fileName = exeInput.Name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
+            //var fileName = exeInput.Name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
+            var fileName = input.Name.ToUpper() + "                " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
+            var dir = Path.GetDirectoryName(input.OutputPath); ;
 
-            var dir = "C:/data/";
-            cc.Write(source.NTDrawLine, dir + fileName);
+            if (input.BPlayback != true)
+            {
+                cc.Write(source.NTDrawLine, dir + @"\" + fileName);
+            }
+            else
+            {
+                fileName = input.Name.ToUpper() + " Playback " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
+                cc.Write(source.NTDrawLine, dir + @"\" + fileName);
+            }
+
+
+
+
+            //cc.Write(source.NTDrawLine, output);
 
             #endregion
 
