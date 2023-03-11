@@ -38,7 +38,12 @@ namespace SqLiteExecutionsToListAndQueryResults
         public static string startDate = "  10:40:56 02/01/2023  ";
         // Set to "12/12/2022" to get all of data
         public static string endDate = "02/28/2022";
-        public static string lastBarTime = "03/10/2023 14:00:00";
+        //  use this string for testing in VS
+        //public static DateTime lastBarTime = DateTime.ParseExact("03/10/2023 14:00:00", "mm dd yyyy HH MM", System.Globalization.CultureInfo.InvariantCulture);
+        //public static DateTime lastBarTime1 = DateTime.Parse("03/10/2023 02:00:00 PM");
+        
+
+        //var dt = lastBarTime.ToStrng(" MM dd yy");
         #endregion Set Parameters
 
         /// <summary>
@@ -55,6 +60,10 @@ namespace SqLiteExecutionsToListAndQueryResults
 
 
         {
+            var timeFirstBarOnChart = DateTime.Parse("06/14/2008 7:30:00 PM");
+            //var timeIn = timeFirstBarOnChart.ToString("yyyy MM dd HH_mm");
+            var timeLastBarOnChart = DateTime.Parse("06/15/2008 2:12:13 PM");
+            //var timeIn = timeLastBarOnChart.ToString("yyyy MM dd HH_mm");
 
             //var path = @"Data Source = C:\data\NinjaTrader.sqlite";
             //var path = @"Data Source = C:\Users\Owner\Documents\NinjaTrader 8\db\NinjaTrader.sqlite";
@@ -293,7 +302,7 @@ namespace SqLiteExecutionsToListAndQueryResults
             //  replace name (local declaration) to input.Name (calling program definition)
             //  var fileName = name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
             //var fileName = exeInput.Name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
-            var fileName = input.Name.ToUpper() + "                " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
+            var fileName = input.Name.ToUpper() + "                " + timeLastBarOnChart + ".csv";
             var dir = Path.GetDirectoryName(input.OutputPath); ;
 
             if (input.BPlayback != true)
@@ -303,7 +312,8 @@ namespace SqLiteExecutionsToListAndQueryResults
             else
             {
                 //  lastBarTime is set in NT 'ChartBars.GetTimeByBarIdx(ChartControl, ChartBars.ToIndex)); //8/11/2015 4:30:00 AM'
-                fileName = input.Name.ToUpper() + " Playback " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + lastBarTime + ".csv";
+                string l = timeLastBarOnChart.ToString("yyyy MM dd HH_mm");
+                fileName = input.Name.ToUpper() + " Playback " + timeFirstBarOnChart.ToString("yyyy MM dd HH_mm") + " To " + timeLastBarOnChart.ToString("yyyy MM dd HH_mm") + ".csv";
                 cc.Write(source.NTDrawLine, dir + @"\" + fileName);
             }
 
