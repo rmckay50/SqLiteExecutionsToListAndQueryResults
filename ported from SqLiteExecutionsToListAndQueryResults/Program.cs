@@ -38,7 +38,6 @@ namespace SqLiteExecutionsToListAndQueryResults
         public static string startDate = "  10:40:56 02/01/2023  ";
         // Set to "12/12/2022" to get all of data
         public static string endDate = "02/28/2022";
-        //  use this string for testing in VS
         //public static DateTime lastBarTime = DateTime.ParseExact("03/10/2023 14:00:00", "mm dd yyyy HH MM", System.Globalization.CultureInfo.InvariantCulture);
         //public static DateTime lastBarTime1 = DateTime.Parse("03/10/2023 02:00:00 PM");
         
@@ -60,10 +59,9 @@ namespace SqLiteExecutionsToListAndQueryResults
 
 
         {
+            //  use first 2 strings for testing in VS
             var timeFirstBarOnChart = DateTime.Parse("06/14/2008 7:30:00 PM");
-            //var timeIn = timeFirstBarOnChart.ToString("yyyy MM dd HH_mm");
             var timeLastBarOnChart = DateTime.Parse("06/15/2008 2:12:13 PM");
-            //var timeIn = timeLastBarOnChart.ToString("yyyy MM dd HH_mm");
 
             //var path = @"Data Source = C:\data\NinjaTrader.sqlite";
             //var path = @"Data Source = C:\Users\Owner\Documents\NinjaTrader 8\db\NinjaTrader.sqlite";
