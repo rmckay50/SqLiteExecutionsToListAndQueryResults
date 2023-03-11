@@ -42,8 +42,8 @@ namespace GetInstListSqLite
             //  Format from .sdf instList was 'Dec 2022' 
             //  Expiry = new DateTime((long)mInsIns.Expiry).ToString(" MMM yyyy"),
             //  public string Expiry { get; set; }
-            var symbol = "NQ";
-            var instrument = 699839150758595;
+            //var symbol = "NQ";
+            //var instrument = 699839150758595;
 
 
 
@@ -156,7 +156,8 @@ namespace GetInstListSqLite
                         //	fill new list 
                         list.InstId = (long?)0;
                         list.ExecId = execList.Id;
-                        //list.Name = symbol                        
+                        //list.Name = symbol;
+                        //  name is one of parameters in call to this .dll form
                         list.Name = name;
                         list.Account = execList.Account;
                         list.Position = execList.Position;

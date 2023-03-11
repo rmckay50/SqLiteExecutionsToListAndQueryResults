@@ -14,12 +14,13 @@ namespace Parameters
         public string EndDate { get; set; }
         public string InputPath { get; set; }
         public string OutputPath { get; set; }
+        public string LastBarTime { get; set; }
 
         public Input()
         {
         }
 
-        public Input(bool bPlayback, string name, string startDate, string endDate, string inputPath, string outputPath)
+        public Input(bool bPlayback, string name, string startDate, string endDate, string inputPath, string outputPath, string lastBarTime)
         {
             BPlayback = bPlayback;
             Name = name;
@@ -27,6 +28,7 @@ namespace Parameters
             EndDate = endDate;
             InputPath = inputPath;
             OutputPath = outputPath;
+            LastBarTime = lastBarTime;
         }
     }
 }

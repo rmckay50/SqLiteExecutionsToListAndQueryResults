@@ -126,3 +126,6 @@
 *   commit - changing nTDrawLine - Name => Symbol   
     starting with 'NTDrawLine.cs'  
     then build  
+
+2023 03 10 1955  
+*   commit - adding lastBarTime form NT to append to csvNTDrawLine to identify when playback ended  

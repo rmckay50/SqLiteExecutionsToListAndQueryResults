@@ -38,6 +38,7 @@ namespace SqLiteExecutionsToListAndQueryResults
         public static string startDate = "  10:40:56 02/01/2023  ";
         // Set to "12/12/2022" to get all of data
         public static string endDate = "02/28/2022";
+        public static string lastBarTime = "03/10/2023 14:00:00";
         #endregion Set Parameters
 
         /// <summary>
@@ -79,13 +80,13 @@ namespace SqLiteExecutionsToListAndQueryResults
             /// </summary>
             /// 
             #region Uncomment for use as .exe
-            Input exeInput = new Input()
-            {
-                BPlayback = false,
-                Name = "nq",
-                StartDate = "01/02/2022",
-                EndDate = "02/05/2023"
-            };
+            //Input exeInput = new Input()
+            //{
+            //    BPlayback = false,
+            //    Name = "nq",
+            //    StartDate = "01/02/2022",
+            //    EndDate = "02/05/2023"
+            //};
             #endregion Uncomment for use as .exe
 
 
@@ -301,7 +302,8 @@ namespace SqLiteExecutionsToListAndQueryResults
             }
             else
             {
-                fileName = input.Name.ToUpper() + " Playback " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
+                //  lastBarTime is set in NT 'ChartBars.GetTimeByBarIdx(ChartControl, ChartBars.ToIndex)); //8/11/2015 4:30:00 AM'
+                fileName = input.Name.ToUpper() + " Playback " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + lastBarTime + ".csv";
                 cc.Write(source.NTDrawLine, dir + @"\" + fileName);
             }
 
