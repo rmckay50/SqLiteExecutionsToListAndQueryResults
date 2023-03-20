@@ -82,9 +82,10 @@ namespace ExtensionMatchAndAddToCsv
 
 
 			RemainingExits = source.Remaining,                                                          //	MatchndAddToCsv
-			Exit = source.StartingExitPrice,                                                            //	MatchndAddToCsv
-																										//Exit = source.Trades[source.RowInTrades].Price,
-		};
+			//Exit = source.StartingExitPrice,
+            Exit = source.StartingExitPrice													//Exit = source.Trades[source.RowInTrades].Price,
+
+        };
 		//	Add new line to CSV list
 		source.Csv.Add(csv);                                                                            //	MatchndAddToCsv
                                                                                                         //	Update RowInCsv

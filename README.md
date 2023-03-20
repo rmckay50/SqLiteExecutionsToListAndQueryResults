@@ -151,3 +151,6 @@
 
 2023 02 18 1620  
 *   commit - save before copying all files to 'SqLiteExecutionsToListAndQueryResults' in Ryzen-2  
+
+2023 03 19  
+*   commit -  added public class NTDrawLineForLINQtoCSV to Program.cs for LINQtoCSV  

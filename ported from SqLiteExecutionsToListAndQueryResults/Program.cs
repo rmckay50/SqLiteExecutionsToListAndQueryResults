@@ -312,6 +312,31 @@ namespace SqLiteExecutionsToListAndQueryResults
 
 
         }
+        public class NTDrawLineForLINQtoCSV
+        {
+            [CsvColumn(FieldIndex = 1)]
+            public int Id { get; set; }
+            [CsvColumn(FieldIndex = 2)]
+            public string Name { get; set; }
+            [CsvColumn(FieldIndex = 3)]
+            public string Long_Short { get; set; }
+            [CsvColumn(FieldIndex = 4)]
+            public long StartTimeTicks { get; set; }
+            [CsvColumn(FieldIndex = 5)]
+            public string StartTime { get; set; }
+            [CsvColumn(FieldIndex = 6)]
+            public double StartY { get; set; }
+            [CsvColumn(FieldIndex = 7)]
+            public long EndTimeTicks { get; set; }
+            [CsvColumn(FieldIndex = 8)]
+            public string EndTime { get; set; }
+            [CsvColumn(FieldIndex = 9)]
+            public double EndY { get; set; }
+            [CsvColumn(FieldIndex = 10)]
+            public double P_L { get; set; }
+
+        }
+
     }
 }
 
