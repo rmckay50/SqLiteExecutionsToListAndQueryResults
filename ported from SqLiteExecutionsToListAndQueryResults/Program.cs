@@ -278,6 +278,25 @@ namespace SqLiteExecutionsToListAndQueryResults
 
 
             #region Use LINQtoCSV on combined list to write
+            //  foreach through source.NTDrawLine to create list with correct order for cc.write
+            //  uses 'NTDrawLineForLINQtoCSV' which has column attributes
+            var columnsWithAttributes = from l in source.NTDrawLine
+                                        select new NTDrawLineForLINQtoCSV
+                                        {
+                                            Id = l.Id,
+                                            Name = l.Name,
+                                            Long_Short = l.Long_Short,
+                                            StartTimeTicks = l.StartTimeTicks,
+                                            StartTime = l.StartTime,
+                                            StartY = l.StartY,
+                                            EndTimeTicks = l.EndTimeTicks,
+                                            EndTime = l.EndTime,
+                                            EndY = l.EndY,
+                                            P_L = l.P_L,
+                                        };
+            columnsWithAttributes.ToList();
+
+
             CsvFileDescription scvDescript = new CsvFileDescription();
             CsvContext cc = new CsvContext();
             cc.Write
@@ -293,14 +312,18 @@ namespace SqLiteExecutionsToListAndQueryResults
             var fileName = input.Name.ToUpper() + "                " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
             var dir = Path.GetDirectoryName(output); ;
 
+
             if ( input.BPlayback != true )
             {
-                cc.Write(source.NTDrawLine, dir + @"\" + fileName);
+                //cc.Write(source.NTDrawLine, dir + @"\" + fileName);
+                cc.Write(columnsWithAttributes, dir + @"\" + fileName);
             }
             else
             {
                 fileName = input.Name.ToUpper() + " Playback " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
-                cc.Write(source.NTDrawLine, dir + @"\" + fileName);
+                //cc.Write(source.NTDrawLine, dir + @"\" + fileName);
+                cc.Write(columnsWithAttributes, dir + @"\" + fileName);
+
             }
 
 

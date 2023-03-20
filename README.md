@@ -154,3 +154,6 @@
 
 2023 03 19  
 *   commit -  added public class NTDrawLineForLINQtoCSV to Program.cs for LINQtoCSV  
+
+2023 03 19 2055  
+*   commit - changed cc.write to use new NTDrawLineForLINQtoCSV  
