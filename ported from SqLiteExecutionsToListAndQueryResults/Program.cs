@@ -301,7 +301,8 @@ namespace SqLiteExecutionsToListAndQueryResults
             CsvContext cc = new CsvContext();
             cc.Write
             (
-            source.NTDrawLine,
+            //source.NTDrawLine,
+                columnsWithAttributes,
             //@"C:\data\csvNTDrawline.csv"
             output
             );

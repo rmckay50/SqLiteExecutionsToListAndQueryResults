@@ -157,3 +157,7 @@
 
 2023 03 19 2055  
 *   commit - changed cc.write to use new NTDrawLineForLINQtoCSV  
+
+2023 03 19 2010  
+*   commit - works! .csv files are displaying correctly  
+    need to change to a .dll  
