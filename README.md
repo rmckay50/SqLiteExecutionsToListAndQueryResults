@@ -161,3 +161,6 @@
 2023 03 19 2010  
 *   commit - works! .csv files are displaying correctly  
     need to change to a .dll  
+
+2023 03 23 1755  
+*   commit - have problem with start time and price - had commented out 'set workingTrades Id' line 162  
