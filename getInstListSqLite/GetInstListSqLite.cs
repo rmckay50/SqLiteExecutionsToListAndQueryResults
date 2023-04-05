@@ -109,6 +109,8 @@ namespace GetInstListSqLite
                         //  add row to list
                         listExecution.Add(exec);
                     }
+                    //  close reader
+                    reader.Close();
                     db.Close();
                 }
                 catch (Exception ex)
