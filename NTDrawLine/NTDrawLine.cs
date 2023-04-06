@@ -26,16 +26,16 @@ namespace NTDrawLine
         public NTDrawLine(int id, string symbol, string long_Short, long startTimeTicks, string startTime, double startY, long endTimeTicks, string endTime, double endY,
             double p_L)
         {
-            Id = id;
-            Symbol = symbol;
-            Long_Short = long_Short;
-            StartTimeTicks = startTimeTicks;
-            StartTime = startTime;
-            StartY = startY;
-            EndTimeTicks = endTimeTicks;
-            EndTime = endTime;
-            EndY = endY;
-            P_L = p_L;
+            Id              = id;
+            Symbol          = symbol;
+            Long_Short      = long_Short;
+            StartTimeTicks  = startTimeTicks;
+            StartTime       = startTime;
+            StartY          = startY;
+            EndTimeTicks    = endTimeTicks;
+            EndTime         = endTime;
+            EndY            = endY;
+            P_L             = p_L;
         }
     }
 }

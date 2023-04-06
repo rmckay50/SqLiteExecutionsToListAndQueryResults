@@ -33,5 +33,7 @@ namespace Parameters
             TimeFirstBarOnChart = timeFirstBarOnChart;
             TimeLastBarOnChart = timeLastBarOnChart;
         }
+
     }
 }
+

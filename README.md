@@ -116,6 +116,56 @@
 2023 02 07 2145  
 *   commit - changed Parameters to add path because of difference with Ryzen-2  
 
+2023 02 08 1900  
+*   commit - this works - creates 'csvNTDrawline.csv' and 'NQ 2023 02 08   04 29 30.csv'  
+    TODO   
+    change project name from 'ported from SqLiteExecutionsToListAndQueryResults.dll' to  
+        'SqLiteExecutionsToListAndQueryResults' for readability  
+
+2023 02 09 1920  
+*   commit - changing project name caused problems  
+    cloned project and all projects need to be rebuilt  
+    this is back where I started  
+    had problems with not finding getInstList in 'getInstListSqLite'  
+    had change Data Source to \NinjaTrader\db\NinjaTrader.sqlite which had open position  
+    deleted last trade and .sln works  
+
+2023 02 09 1925  
+*   commit - this is working again but change was made to 'Parameters.cs'  
+    for some reason there were 2 namespaces  
+    may have been attempt to work with NT indicator  
+
+2023 02 13 1725  
+*   commit - NinjaTrader needs Executions - adding Executions project  
+
+2023 02 13 1730  
+*   commit -  added Executions project and used Executions.dll in getInstListSqLite  
+    works when called from 'CallSqLiteExecutionsToListAndQueryResults'  
+
+2023 02 13 2140  
+*   commit - changing 'CallSqLiteExecutionsToListAndQueryResults' to use Executions.dll  
+    NT sees 2 Executions definitions - 'CallSqLiteExecutionsToListAndQueryResults' and 'Executions'  
+
+2023 02 16 1620  
+*   commit - need to include output file name from NinjaTrader  
+
+2023 02 18 1620  
+*   commit - save before copying all files to 'SqLiteExecutionsToListAndQueryResults' in Ryzen-2  
+
+2023 03 19  
+*   commit -  added public class NTDrawLineForLINQtoCSV to Program.cs for LINQtoCSV  
+
+2023 03 19 2055  
+*   commit - changed cc.write to use new NTDrawLineForLINQtoCSV  
+
+2023 03 19 2010  
+*   commit - works! .csv files are displaying correctly  
+    need to change to a .dll  
+
+2023 03 23 1755  
+*   commit - have problem with start time and price - had commented out 'set workingTrades Id' line 162  
+*   commit - changed Parameters to add path because of difference with Ryzen-2  
+
 2023 03 03 2055  
 *   commit - completed change in prameters - added input and output paths
     works with tsla:  

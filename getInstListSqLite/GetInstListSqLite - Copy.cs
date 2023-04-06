@@ -31,7 +31,7 @@ namespace GetInstListSqLite
             List<Ret.Ret> listExecutionRet = new List<Ret.Ret>();
             //List<Query> selectedList = new List<Query>();
             //List<Ret.Ret> instList = new List<Ret.Ret>();
-            var instList = new List<Ret.Ret>();
+           var instList = new List<Ret.Ret>();
 
             //List<Query> listFromQuery = new List<Query>();
 
@@ -42,8 +42,8 @@ namespace GetInstListSqLite
             //  Format from .sdf instList was 'Dec 2022' 
             //  Expiry = new DateTime((long)mInsIns.Expiry).ToString(" MMM yyyy"),
             //  public string Expiry { get; set; }
-            //var symbol = "NQ";
-            //var instrument = 699839150758595;
+            var symbol = "NQ";
+            var instrument = 699839150758595;
 
 
 
@@ -54,7 +54,7 @@ namespace GetInstListSqLite
             var startTicks = sDateUtc.Ticks;
             DateTime eDate = DateTime.Parse(endDate);                           //.Dump("eDate")
             DateTime eDateUtc = TimeZoneInfo.ConvertTimeToUtc(eDate);           //.Dump("eDateUtc")
-
+             
 
             using (var db = new System.Data.SQLite.SQLiteConnection(path))
             {
@@ -109,8 +109,6 @@ namespace GetInstListSqLite
                         //  add row to list
                         listExecution.Add(exec);
                     }
-                    //  close reader
-                    reader.Close();
                     db.Close();
                 }
                 catch (Exception ex)
@@ -158,9 +156,7 @@ namespace GetInstListSqLite
                         //	fill new list 
                         list.InstId = (long?)0;
                         list.ExecId = execList.Id;
-                        //list.Name = symbol;
-                        //  name is one of parameters in call to this .dll form
-                        list.Name = name;
+                        list.Name = symbol;
                         list.Account = execList.Account;
                         list.Position = execList.Position;
                         list.Quantity = execList.Quantity;
@@ -201,8 +197,7 @@ namespace GetInstListSqLite
                                 InstId = (long?)0,
                                 ExecId = list.ExecId,
                                 Account = list.Account,
-                                //Name = symbol,
-                                Name = list.Name,
+                                Name = symbol,
                                 Position = list.Position,
                                 Quantity = list.Quantity,
                                 IsEntry = list.IsEntry,

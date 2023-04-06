@@ -90,10 +90,13 @@ namespace ExtensionMatchAndAddToCsv
             {
                 Console.WriteLine("sv.EntryId == 106");
 
-            }
-            //	Add new line to CSV list
-            source.Csv.Add(csv);                                                                            //	MatchndAddToCsv
-                                                                                                            //	Update RowInCsv
+			RemainingExits = source.Remaining,                                                          //	MatchndAddToCsv
+			Exit = source.StartingExitPrice,                                                            //	MatchndAddToCsv
+																										//Exit = source.Trades[source.RowInTrades].Price,
+		};
+		//	Add new line to CSV list
+		source.Csv.Add(csv);                                                                            //	MatchndAddToCsv
+                                                                                                        //	Update RowInCsv
             /// 2022 11 25 1325 Commented out to check for need																										//	Record row in CSV
             //source.RowInCsv++;                                                                              //	MatchndAddToCsv
             //	source.ExitQty is updated remainng quantity to match is quantity matched 

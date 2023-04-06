@@ -37,7 +37,8 @@
     <Reference Include="NTDrawLine">
       <HintPath>..\NTDrawLine\bin\Debug\NTDrawLine.dll</HintPath>
     </Reference>
-    <Reference Include="Source">
+    <Reference Include="Source, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Source\bin\Debug\Source.dll</HintPath>
     </Reference>
     <Reference Include="System" />
