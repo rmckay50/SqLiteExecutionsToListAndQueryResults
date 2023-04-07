@@ -30,7 +30,6 @@ namespace SqLiteExecutionsToListAndQueryResults
 {
     public class Program
     {
-
         #region Set Parameters
         ////	Set to true for playback (account - 1)
         //  These parameters are passed from calling progran
