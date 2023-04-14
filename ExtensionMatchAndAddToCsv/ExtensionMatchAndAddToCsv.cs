@@ -80,31 +80,7 @@ namespace ExtensionMatchAndAddToCsv
                 Exit = source.StartingExitPrice,               
 
             };
-            Debug.WriteLine("EntryId = {csv.EntryId}");
-            //Debug.Assert(csv.EntryId <= 75, csv.EntryId.ToString());
-
-            //  debug - stop when csc.EntryId = 106
-            Console.WriteLine(csv.EntryId);
-            //Debug.Assert(csv.EntryId == 85,"Greaer than 85");
-            if(csv.EntryId == 76 )
-            {
-                Console.WriteLine("sv.EntryId == 106");
-
-			RemainingExits = source.Remaining,                                                          //	MatchndAddToCsv
-			Exit = source.StartingExitPrice,                                                            //	MatchndAddToCsv
-																										//Exit = source.Trades[source.RowInTrades].Price,
-		};
-		//	Add new line to CSV list
 		source.Csv.Add(csv);                                                                            //	MatchndAddToCsv
-                                                                                                        //	Update RowInCsv
-            /// 2022 11 25 1325 Commented out to check for need																										//	Record row in CSV
-            //source.RowInCsv++;                                                                              //	MatchndAddToCsv
-            //	source.ExitQty is updated remainng quantity to match is quantity matched 
-            ///	Try commenting this out
-            //source.ExitQty = source.ExitQty - source.Remaining;
-
-            //Console.WriteLine("\nMatchndAddToCsv() Returned to " + memberName + "() at line " + LineNumber + " / " + LN());
-
             return source;                                                                                  //	MatchndAddToCsv
         }
         #endregion MatchAndAddToCsv

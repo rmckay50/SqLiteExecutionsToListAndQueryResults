@@ -422,6 +422,8 @@ using (var db = new System.Data.SQLite.SQLiteConnection(path))
             }
             #endregion
         }
+*/
+#endregion Changed to getInstList.dll
 
         public class NTDrawLineForLINQtoCSV
         {
@@ -447,7 +449,5 @@ using (var db = new System.Data.SQLite.SQLiteConnection(path))
             public double P_L { get; set; }
         }
 
-    }
-}
 
 
