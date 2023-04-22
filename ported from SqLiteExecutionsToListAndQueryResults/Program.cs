@@ -35,9 +35,9 @@ namespace SqLiteExecutionsToListAndQueryResults
         //  These parameters are passed from calling progran
         public static bool bPlayback = false;
         public static string name = "nq";
-        public static string startDate = "  10:40:56 02/01/2023  ";
+        public static string startDate = "  10:40:56 03/22/2023  ";
         // Set to "12/12/2022" to get all of data
-        public static string endDate = "02/28/2022";
+        public static string endDate = "03/24/2022";
         #endregion Set Parameters
 
         /// <summary>
@@ -160,14 +160,14 @@ namespace SqLiteExecutionsToListAndQueryResults
             #endregion Initialize flags and variables in source
 
             #region Fill in Id	Not used on Ryzen-2																				//	Main
-            ////	Add Id to workingTrades
-            //int i = 0;                                                                                          //	Main
+            //	Add Id to workingTrades
+            int i = 0;                                                                                          //	Main
 
-            //foreach (var t in workingTrades)                                                                        //	Main
-            //{
-            //    t.Id = i;                                                                                       //	Main
-            //    i++;                                                                                            //	Main
-            //}
+            foreach (var t in workingTrades)                                                                        //	Main
+            {
+                t.Id = i;                                                                                       //	Main
+                i++;                                                                                            //	Main
+            }
             #endregion Fill in Id																					//	Main
 
             #region foreach() through source.Trades
@@ -180,6 +180,7 @@ namespace SqLiteExecutionsToListAndQueryResults
                 //	Updated in UpdateActiveEntery()
                 if (t.Id == 0 && t.IsEntry == true)
                 {
+                    //  having a problem with execution Id not being accessed
                     source.ActiveEntryId = t.Id;                                                                //	Main
                     source.ActiveEntryRemaining = t.Qty;                                                        //	Main
                     source.ActiveEntryPrice = t.Price;                                                          //	Main
@@ -223,12 +224,14 @@ namespace SqLiteExecutionsToListAndQueryResults
 
             #region foreach through .csv and add StartTimeTicks StartTime ExitTimeTicks ExitTime Long_Short
             //  fill in csv.Entry.ID
-            int entryId = 0;
-            foreach (var entry in source.Csv)
-            {
-                entry.EntryId = entryId;
-                entryId++;
-            }
+            //  may be causing problems with setting start time and price
+            //  commented out
+            //int entryId = 0;
+            //foreach (var entry in source.Csv)
+            //{
+            //    entry.EntryId = entryId;
+            //    entryId++;
+            //}
 
             foreach (var csv in source.Csv)
             {
@@ -299,7 +302,7 @@ namespace SqLiteExecutionsToListAndQueryResults
                 fileName = input.Name.ToUpper() + " Playback " + input.TimeFirstBarOnChart + " To " + input.TimeLastBarOnChart + ".csv";
                 cc.Write(columnsWithAttributes, dir + @"\" + fileName);
             }
-            #endregion
+            #endregion Use LINQtoCSV on combined list to write
         }
 
         public class NTDrawLineForLINQtoCSV

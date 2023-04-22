@@ -70,21 +70,12 @@ namespace ExtensionMatchAndAddToCsv
 		//	Add line to csv
 		CSV.CSV csv = new CSV.CSV()                                                                             //	MatchndAddToCsv
 		{
-			EntryId = source.ActiveEntryId,                                                             //	MatchndAddToCsv
-
-
+			EntryId = source.ActiveEntryId,           //	MatchndAddToCsv
 			FilledBy = source.rowInTrades,                                                              //	MatchndAddToCsv
-																										//Entry = source.Trades[source.RowInTrades - 1].Price,
 			Entry = source.ActiveEntryPrice,                                                            //	MatchAndAddToCsv
-																										//Qty = source.Trades[source.RowInTrades].Qty,
-
 			Qty = source.ExitQty,                                                                       //	MatchndAddToCsv
-
-
 			RemainingExits = source.Remaining,                                                          //	MatchndAddToCsv
-			//Exit = source.StartingExitPrice,
             Exit = source.StartingExitPrice													//Exit = source.Trades[source.RowInTrades].Price,
-
         };
 		//	Add new line to CSV list
 		source.Csv.Add(csv);                                                                            //	MatchndAddToCsv
