@@ -42,8 +42,8 @@ namespace GetInstListSqLite
             //  Format from .sdf instList was 'Dec 2022' 
             //  Expiry = new DateTime((long)mInsIns.Expiry).ToString(" MMM yyyy"),
             //  public string Expiry { get; set; }
-            var symbol = "NQ";
-            var instrument = 699839150758595;
+            //var symbol = "NQ";
+            //var instrument = 699839150758595;
 
 
 
@@ -109,6 +109,8 @@ namespace GetInstListSqLite
                         //  add row to list
                         listExecution.Add(exec);
                     }
+                    //  close reader
+                    reader.Close();
                     db.Close();
                 }
                 catch (Exception ex)
@@ -156,7 +158,9 @@ namespace GetInstListSqLite
                         //	fill new list 
                         list.InstId = (long?)0;
                         list.ExecId = execList.Id;
-                        list.Name = symbol;
+                        //list.Name = symbol;
+                        //  name is one of parameters in call to this .dll form
+                        list.Name = name;
                         list.Account = execList.Account;
                         list.Position = execList.Position;
                         list.Quantity = execList.Quantity;
@@ -189,23 +193,16 @@ namespace GetInstListSqLite
             /// </summary>
             try
             {
-                //  If bPlayback == true set account == 1
-                //  default is account == 2
-                var account = 2;
-                if( bPlayback == true)
-                {
-                    account = 1;
-                }
                 instList = (from list in listExecutionRet
                                 //where (Int64)list.Instrument == (Int64)62124056207858786      //  62124056207858786
-                            where list.Time > (sDateUtc.Ticks) 
-                            where list.Account == account
+                            where list.Time > (sDateUtc.Ticks)
                             select new Ret.Ret()
                             {
                                 InstId = (long?)0,
                                 ExecId = list.ExecId,
                                 Account = list.Account,
-                                Name = symbol,
+                                //Name = symbol,
+                                Name = list.Name,
                                 Position = list.Position,
                                 Quantity = list.Quantity,
                                 IsEntry = list.IsEntry,

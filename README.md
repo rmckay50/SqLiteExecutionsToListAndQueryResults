@@ -164,3 +164,22 @@
 
 2023 03 23 1755  
 *   commit - have problem with start time and price - had commented out 'set workingTrades Id' line 162  
+*   commit - changed Parameters to add path because of difference with Ryzen-2  
+
+2023 03 03 2055  
+*   commit - completed change in prameters - added input and output paths
+    works with tsla:  
+        InputPath       = @"Data Source = c:\Users\Rod\Documents\NinjaTrader 8\db\NinjaTrader.sqlite",  
+        OutputPath      = @"C:\data\OutPutStr.csv"  
+
+2023 03 04 0845  
+*   commit - changing nTDrawLine - Name => Symbol   
+    starting with 'NTDrawLine.cs'  
+    then build  
+
+2023 03 10 1955  
+*   commit - adding lastBarTime form NT to append to csvNTDrawLine to identify when playback ended  
+
+2023 commit - added timespan to name of Playback result  
+
+2023 commit - added NT code to get DateTime strings for .csv file  

@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="Trade, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CreateExtensionGetInstLIst\Trade\bin\Debug\Trade.dll</HintPath>
+      <HintPath>..\Trade\bin\Debug\Trade.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,6 @@ namespace Parameters
 {
     public class Input
     {
-
         public bool BPlayback { get; set; }
         public string Name { get; set; }
         public string StartDate { get; set; }

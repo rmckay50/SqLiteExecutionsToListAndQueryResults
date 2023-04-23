@@ -30,7 +30,7 @@ namespace SqLiteExecutionsToListAndQueryResults
 {
     public class Program
     {
-            #region Set Parameters
+        #region Set Parameters
         ////	Set to true for playback (account - 1)
         //  These parameters are passed from calling progran
         public static bool bPlayback = false;
@@ -49,8 +49,31 @@ namespace SqLiteExecutionsToListAndQueryResults
         /// 
         //static void Main(string[] args)
         //  can use 'Input' becaue using statement is 'using Parameters.Paramaters;'
-        public static void main(Input input)
+        //public static void main(Parameters.Input input, string output)
+        public static void main(Parameters.Input input)
+
+
         {
+            var timeIn = input.TimeLastBarOnChart;
+            //  use first 2 strings for testing in VS
+            //var timeFirstBarOnChart = DateTime.Parse("06/14/2008 7:30:00 PM");
+            //var timeLastBarOnChart = DateTime.Parse("06/15/2008 2:12:13 PM");
+
+            //  use these strings for .dll in NT need to add them to indicator
+            //  will not build in VS
+            //DateTime timeLastBarOnChart;
+            //DateTime timeFirstBarOnChart;
+            //timeFirstBarOnChart = ChartBars.GetTimeByBarIdx(ChartControl, ChartBars.FromIndex);
+            //Print(string.Format("timeFirstBarOnChart is at {0}", timeFirstBarOnChart.ToString("yy MM dd HH_mm"))); //8/11/2015 4:30:00 AM  
+            //timeLastBarOnChart = ChartBars.GetTimeByBarIdx(ChartControl, ChartBars.ToIndex);
+            //Print(ChartBars.GetTimeByBarIdx(ChartControl, ChartBars.ToIndex)); //8/11/2015 4:30:00 AM  
+            //Print(string.Format("lastBarOnChart is at {0}", timeLastBarOnChart.ToString("yy MM dd HH_mm"))); //8/11/2015 4:30:00 AM  
+
+
+
+            //var path = @"Data Source = C:\data\NinjaTrader.sqlite";
+            //var path = @"Data Source = C:\Users\Owner\Documents\NinjaTrader 8\db\NinjaTrader.sqlite";
+            //var path = @"Data Source = \\RYZEN-2\NinjaTrader 8\db\NinjaTrader.sqlite";
             var path = input.InputPath;
 
             List<CSV.CSV> CSv = new List<CSV.CSV>();
@@ -84,11 +107,11 @@ namespace SqLiteExecutionsToListAndQueryResults
             var instList = Methods.getInstList
                 (
             #region Uncomment for use as .exe
-                    //name,
-                    //startDate,
-                    //endDate,
-                    //bPlayback,
-                    //@"
+                //name,
+                //startDate,
+                //endDate,
+                //bPlayback,
+                //@"
             #endregion Uncomment for use as .exe
 
             #region Uncomment for use as .dll
@@ -123,7 +146,8 @@ namespace SqLiteExecutionsToListAndQueryResults
             try
             {
                 if (trades[0].Position != 0)
-                {                
+
+                {
                     Console.WriteLine(@"Postion on - not flat");                                                  //	Main
                     Console.WriteLine(string.Format("Trades position = {0}", (trades[0].Position)));        //System.Environment.Exit(-1);                                                                //	Main																
                 }
@@ -237,12 +261,12 @@ namespace SqLiteExecutionsToListAndQueryResults
             {
                 //	fill in blank spaces from workingTrades with time ans tickd//
 
-                csv.Name                = workingTrades[csv.EntryId].Name;
-                csv.StartTimeTicks      = workingTrades[csv.EntryId].Time;
-                csv.StartTime           = workingTrades[csv.EntryId].HumanTime;
-                csv.EndTimeTicks        = workingTrades[csv.FilledBy].Time;
-                csv.EndTime             = workingTrades[csv.FilledBy].HumanTime;
-                csv.Long_Short          = workingTrades[csv.EntryId].Long_Short;
+                csv.Name = workingTrades[csv.EntryId].Name;
+                csv.StartTimeTicks = workingTrades[csv.EntryId].Time;
+                csv.StartTime = workingTrades[csv.EntryId].HumanTime;
+                csv.EndTimeTicks = workingTrades[csv.FilledBy].Time;
+                csv.EndTime = workingTrades[csv.FilledBy].HumanTime;
+                csv.Long_Short = workingTrades[csv.EntryId].Long_Short;
             }
 
             #endregion foreach through .csv and add StarTimeTicks StartTime ExitTimeTicks ExitTime
@@ -282,16 +306,108 @@ namespace SqLiteExecutionsToListAndQueryResults
             CsvContext cc = new CsvContext();
             cc.Write
             (
-                columnsWithAttributes,
-                input.OutputPath
-
+            source.NTDrawLine,
+            //@"C:\data\csvNTDrawline.csv"
+            input.OutputPath
             );
 
             //  replace name (local declaration) to input.Name (calling program definition)
             //  var fileName = name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
             //var fileName = exeInput.Name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
             var fileName = input.Name.ToUpper() + "                " + input.TimeFirstBarOnChart + ".csv";
-            var dir = Path.GetDirectoryName(input.OutputPath);
+            var dir = Path.GetDirectoryName(input.OutputPath); ;
+
+            if (input.BPlayback != true)
+            {
+                cc.Write(source.NTDrawLine, dir + @"\" + fileName);
+            }
+            else
+            {
+                //  lastBarTime is set in NT 'ChartBars.GetTimeByBarIdx(ChartControl, ChartBars.ToIndex)); //8/11/2015 4:30:00 AM'
+                string l = input.TimeLastBarOnChart;
+                fileName = input.Name.ToUpper() + " Playback " + input.TimeFirstBarOnChart + " To " + input.TimeLastBarOnChart + ".csv";
+                cc.Write(source.NTDrawLine, dir + @"\" + fileName);
+            }
+
+
+
+
+            //cc.Write(source.NTDrawLine, output);
+
+            #endregion
+
+
+        }
+    }
+}
+
+
+//Id Account	BarIndex	Commission	Exchange	ExecutionId	Fee	Instrument	IsEntry	IsEntryStrategy	IsExit	IsExitStrategy	LotSize	MarketPosition	MaxPrice	MinPrice	Name	OrderId	Position	PositionStrategy	Price	Quantity	Rate	StatementDate	Time	ServerName
+//16633	2	-1	0	9	b6519f9200c84acb9d29002b46be94f7	0	62124056207858786	0	0	1	0	1	1	-1.79769313486232E+308	1.79769313486232E+308	Close	80929054cdad4a39a524760693980c2f	0	0	11873	1	1	638102016000000000	638102771851317160	ZBOOK
+
+#region Changed to getInstList.dll
+/*
+
+//  Below is code from getInstList for filling in Expiry
+//  Expiry is located in Instruments 
+//  Can either load Instruments and do query or get info from chart 
+//  Will try char and in interim just add string 'Dec 2022'
+//  Format from .sdf instList was 'Dec 2022' 
+//  Expiry = new DateTime((long)mInsIns.Expiry).ToString(" MMM yyyy"),
+//  public string Expiry { get; set; }
+
+var symbol = "NQ";
+var instrument = 699839150758595;
+
+using (var db = new System.Data.SQLite.SQLiteConnection(path))
+{
+    try
+    {
+        db.Open();
+    ///<summary>
+    ///<param> create reader, command </param>
+    ///<
+    /// </summary>
+    /// 
+
+    SQLiteDataReader reader;
+    SQLiteCommand sqlite_cmd;
+    sqlite_cmd = db.CreateCommand();
+    sqlite_cmd.CommandText = "SELECT * FROM Executions";
+
+    reader = sqlite_cmd.ExecuteReader();
+
+    //  used to hold data after read from db
+
+        while (reader.Read())
+        {
+            Executions exec = new Executions();
+            exec.Id                     = (long)reader[0];
+            exec.Account                = (long)reader[1];
+            exec.BarIndex               = (long)reader[2];
+            exec.Commission             = (System.Double)reader[3];
+            exec.Exchange               = (long)reader[4];
+            exec.ExecutionId            = (string)reader[5];
+            exec.Fee                    = (double)reader[6];
+            exec.Instrument             = (long)reader[7];
+            exec.IsEntry                = (long)reader[8];
+            exec.IsEntryStrategy        = (long)reader[9];
+            exec.IsExit                 = (long)reader[10];
+            exec.IsExitStrategy         = (long)reader[11];
+            exec.LotSize                = (long)reader[12];
+            exec.MarketPosition         = (long)reader[13];
+            exec.MaxPrice               = (System.Double)reader[14];
+            exec.MinPrice               = (System.Double)reader[15];
+            exec.Name                   = (string)reader[16];
+            exec.OrderId                = (string)reader[17];
+            exec.Position               = (long)reader[18];
+            exec.PositionStrategy       = (long)reader[19];   
+            exec.Price                  = (System.Double)reader[20];
+            exec.Quantity               = (long)reader[21];
+            exec.Rate                   = (double)reader[22];
+            exec.StatementDate          = (long)reader[23];
+            exec.Time                   = (long)reader[24];
+            exec.ServerName             = (string)reader[25];
 
             if ( input.BPlayback != true )
             {
@@ -304,6 +420,8 @@ namespace SqLiteExecutionsToListAndQueryResults
             }
             #endregion Use LINQtoCSV on combined list to write
         }
+*/
+#endregion Changed to getInstList.dll
 
         public class NTDrawLineForLINQtoCSV
         {
@@ -329,7 +447,5 @@ namespace SqLiteExecutionsToListAndQueryResults
             public double P_L { get; set; }
         }
 
-    }
-}
 
 

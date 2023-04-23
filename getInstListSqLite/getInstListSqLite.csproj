@@ -43,8 +43,7 @@
     <Reference Include="Executions">
       <HintPath>..\Executions\bin\Debug\Executions.dll</HintPath>
     </Reference>
-    <Reference Include="Ret, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Ret">
       <HintPath>..\Ret\bin\Debug\Ret.dll</HintPath>
     </Reference>
     <Reference Include="System" />
