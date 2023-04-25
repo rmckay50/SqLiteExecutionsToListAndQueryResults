@@ -15,7 +15,7 @@ namespace ExtensionGetActiveEntry
         //	Get starting entry price row and values
         //	Start at first entry above exit and search for row that has entry = true and matched = false
         //	Record starting Id
-        public static Source GetActiveEntry(this Source source, [CallerMemberName] string memberName = "", [CallerLineNumber] int LineNumber = 0)                                           //	GetActiveEntry
+        public static Source.Source GetActiveEntry(this Source.Source source, [CallerMemberName] string memberName = "", [CallerLineNumber] int LineNumber = 0)                                           //	GetActiveEntry
         {
             //Console.WriteLine("\nGetActiveEntry() Called by " + memberName + " () at line " + LineNumber + " / " + LN());
             //if (source.ActiveEntryRemaining == 0)
