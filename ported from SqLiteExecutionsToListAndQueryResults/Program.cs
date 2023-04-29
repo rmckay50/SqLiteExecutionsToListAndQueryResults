@@ -305,16 +305,7 @@ namespace SqLiteExecutionsToListAndQueryResults
 
             if (input.BPlayback != true)
             {
-                var path2 = @"\";
-                  var path1 = dir;
-              var path3 = fileName;
-                   var path = dir + @"\" + fileName;
-             cc.Write(source.NTDrawLine, dir + @"\" + fileName);
-                cc.Write(source.NTDrawLine,path + path1 + path2);
-                cc.Write(columnsWithAttributes, dir + @"\" + fileName);
-                //var p = path.Combine(dir, fileName);
-
-
+                cc.Write(source.NTDrawLine, dir + @"\" + fileName);
             }
             else
             {
