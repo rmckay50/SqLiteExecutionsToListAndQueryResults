@@ -29,7 +29,7 @@ using System.IO;
 namespace SqLiteExecutionsToListAndQueryResults
 {
     public class Program
-    {
+    { 
         #region Set Parameters
         ////	Set to true for playback (account - 1)
         //  These parameters are passed from calling progran
@@ -306,27 +306,26 @@ namespace SqLiteExecutionsToListAndQueryResults
             CsvContext cc = new CsvContext();
             cc.Write
             (
-            source.NTDrawLine,
-            //@"C:\data\csvNTDrawline.csv"
-            input.OutputPath
+                columnsWithAttributes,
+                input.OutputPath
             );
 
             //  replace name (local declaration) to input.Name (calling program definition)
             //  var fileName = name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
             //var fileName = exeInput.Name.ToUpper() + " " + DateTime.Now.ToString("yyyy MM dd   HH mm ss") + ".csv";
-            var fileName = input.Name.ToUpper() + "                " + input.TimeFirstBarOnChart + ".csv";
+            var fileName = input.Name.ToUpper() + "                " + input.TimeLastBarOnChart + ".csv";
             var dir = Path.GetDirectoryName(input.OutputPath); ;
 
             if (input.BPlayback != true)
             {
-                cc.Write(source.NTDrawLine, dir + @"\" + fileName);
+                cc.Write(columnsWithAttributes, dir + @"\" + fileName);
             }
             else
             {
                 //  lastBarTime is set in NT 'ChartBars.GetTimeByBarIdx(ChartControl, ChartBars.ToIndex)); //8/11/2015 4:30:00 AM'
                 string l = input.TimeLastBarOnChart;
                 fileName = input.Name.ToUpper() + " Playback " + input.TimeFirstBarOnChart + " To " + input.TimeLastBarOnChart + ".csv";
-                cc.Write(source.NTDrawLine, dir + @"\" + fileName);
+                cc.Write(columnsWithAttributes, dir + @"\" + fileName);
             }
 
 

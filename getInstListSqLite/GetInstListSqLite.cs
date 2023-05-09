@@ -192,10 +192,19 @@ namespace GetInstListSqLite
             ///<param>did not fill in expiry - found in Instruments with instrument #</param>
             /// </summary>
             try
-            {
+            {                
+                //  If bPlayback == true set account == 1
+                //  default is account == 2
+                var account = 2;
+                if (bPlayback == true)
+                {
+                    account = 1;
+                }
+
                 instList = (from list in listExecutionRet
-                                //where (Int64)list.Instrument == (Int64)62124056207858786      //  62124056207858786
-                            where list.Time > (sDateUtc.Ticks)
+                            //  list.Time < sDateUtc.Ticks - commenting it out
+                            //where list.Time > (sDateUtc.Ticks)
+                            where list.Account == account
                             select new Ret.Ret()
                             {
                                 InstId = (long?)0,
