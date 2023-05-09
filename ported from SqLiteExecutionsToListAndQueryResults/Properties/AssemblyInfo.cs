@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("ported from SqLiteExecutionsToListAndQueryResults")]
-[assembly: AssemblyCopyright("Copyright ©  2023")]
+[assembly: AssemblyCopyright("2023 04 22")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -69,17 +69,17 @@ namespace ExtensionMatchAndAddToCsv
             //ln.Dump("In MatchndAddToCsv()   " + LineNumber);                                                //	MatchndAddToCsv
             //Console.WriteLine($"\nsource.ExitQty = {source.ExitQty}");                                    //	MatchndAddToCsv
 
-            //	Add line to csv
-            CSV.CSV csv = new CSV.CSV()                                                                             //	MatchndAddToCsv
-            {
-                EntryId = source.ActiveEntryId,                                                             //	MatchndAddToCsv
-                FilledBy = source.rowInTrades,                                                              //	MatchndAddToCsv
-                Entry = source.ActiveEntryPrice,                                                            //	MatchAndAddToCsv
-                Qty = source.ExitQty,                                                                       //	MatchndAddToCsv
-                RemainingExits = source.Remaining,                                                          //	MatchndAddToCsv
-                Exit = source.StartingExitPrice,               
-
-            };
+		//	Add line to csv
+		CSV.CSV csv = new CSV.CSV()                                                                             //	MatchndAddToCsv
+		{
+			EntryId = source.ActiveEntryId,           //	MatchndAddToCsv
+			FilledBy = source.rowInTrades,                                                              //	MatchndAddToCsv
+			Entry = source.ActiveEntryPrice,                                                            //	MatchAndAddToCsv
+			Qty = source.ExitQty,                                                                       //	MatchndAddToCsv
+			RemainingExits = source.Remaining,                                                          //	MatchndAddToCsv
+            Exit = source.StartingExitPrice													//Exit = source.Trades[source.RowInTrades].Price,
+        };
+		//	Add new line to CSV list
 		source.Csv.Add(csv);                                                                            //	MatchndAddToCsv
             return source;                                                                                  //	MatchndAddToCsv
         }
