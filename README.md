@@ -189,3 +189,6 @@
 
 2023 05 11 1430  
     commit - commits are pushed to both rmckay49 and 50 when 50 is selected.  Delete rmckay49 and try commit  
+
+2023 05 11 1435  
+    commit - removed remote rmckay49  
