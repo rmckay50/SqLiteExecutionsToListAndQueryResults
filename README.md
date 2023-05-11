@@ -183,3 +183,6 @@
 2023 commit - added timespan to name of Playback result  
 
 2023 commit - added NT code to get DateTime strings for .csv file  
+
+2023 05 11 1425  
+    commit - use rmckay50 on Ryzen - 2  
